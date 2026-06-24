@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField
+
+# from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -33,7 +34,7 @@ class Movie(models.Model):
     )
     genres = models.ManyToManyField(Genre, related_name="movies")
     recommendation_text = models.TextField()
-    poster = CloudinaryField("image", default="placeholder")
+    # poster = CloudinaryField("image", default="placeholder")
     director = models.CharField(max_length=200, blank=True)
     release_year = models.IntegerField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
