@@ -24,6 +24,7 @@ class MovieAdmin(admin.ModelAdmin):
     list_filter = ("approved", "genres", "created_on")
     search_fields = ("title", "director", "submitted_by__username")
     filter_horizontal = ("genres",)
+    prepopulated_fields = {"slug": ("title",)}
 
 
 @admin.register(Review)

@@ -35,6 +35,7 @@ class Movie(models.Model):
     """
 
     title = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True)
     submitted_by = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, related_name="submitted_movies"
     )
