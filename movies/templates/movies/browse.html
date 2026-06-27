@@ -1,7 +1,11 @@
 <h1>Browse Movies</h1>
 
 {% for movie in object_list %}
-    <p>{{ movie.title }}</p>
+<p>
+    <a href="{% url 'movie_detail' movie.slug %}">
+        {{ movie.title }}
+    </a>
+</p>
 {% empty %}
     <p>No approved movies yet.</p>
 {% endfor %}
