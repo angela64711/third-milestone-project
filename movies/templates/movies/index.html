@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="py-5 text-center bg-light rounded">
+    <div class="container">
+        <h1 class="display-5 fw-bold">
+            Discover films with Berlin Movie Circle
+        </h1>
+
+        <p class="lead text-muted mt-3">
+            A community space for English-speaking expats and international residents in Berlin to recommend, rate, and
+            review movies.
+        </p>
+
+        <div class="mt-4">
+            <a href="{% url 'movie_list' %}" class="btn btn-primary btn-lg">
+                Browse Movies
+            </a>
+
+            <span class="btn btn-outline-secondary btn-lg disabled">
+                Join Community
+            </span>
+        </div>
+    </div>
+</section>
+
+<section class="mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h2>Latest recommendations</h2>
+            <p class="text-muted mb-0">
+                The latest movie suggestions from the community.
+            </p>
+        </div>
+
+        <a href="{% url 'movie_list' %}" class="btn btn-outline-primary">
+            View all
+        </a>
+    </div>
+
+    <div class="row g-4">
+        {% for movie in latest_movies %}
+        <div class="col-md-6 col-lg-3">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                    <h3 class="h5 card-title">
+                        {{ movie.title }}
+                    </h3>
+
+                    {% if movie.release_year %}
+                    <p class="text-muted mb-2">
+                        {{ movie.release_year }}
+                    </p>
+                    {% endif %}
+
+                    {% if movie.director %}
+                    <p class="card-text">
+                        Directed by {{ movie.director }}
+                    </p>
+                    {% endif %}
+
+                    <div class="mt-auto">
+                        <div class="bg-secondary-subtle d-flex align-items-center justify-content-center mx-auto mb-3 p-3 text-center"
+                            style="aspect-ratio: 2 / 3; width: 80%; max-height: 260px;">
+                            <span class="text-muted">Poster coming soon</span>
+                        </div>
+
+                        <a href="{% url 'movie_detail' movie.slug %}" class="btn btn-sm btn-primary">
+                            View details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col">
+            <p>No approved movie recommendations yet.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="row g-4 mt-5">
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h5 card-title">Find something worth watching</h2>
+                <p class="card-text">
+                    Browse movie recommendations shared by people living in Berlin.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h5 card-title">Share your opinion</h2>
+                <p class="card-text">
+                    Registered users can recommend films, rate them, and write reviews.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h5 card-title">Community moderated</h2>
+                <p class="card-text">
+                    Movie suggestions and reviews are moderated to keep the community useful and welcoming.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mt-5">
+    <h2>About Berlin Movie Circle</h2>
+    <p>
+        Berlin Movie Circle is a movie recommendation and review platform for English-speaking expats and international
+        residents in Berlin.
+        The goal is simple: make it easier to discover films worth watching and share thoughtful recommendations with
+        others.
+    </p>
+</section>
+
+{% endblock %}

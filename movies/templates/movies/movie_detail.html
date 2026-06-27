@@ -2,45 +2,62 @@
 
 {% block content %}
 
-<h1>{{ movie.title }}</h1>
+<section class="row align-items-start mb-4">
+    <div class="col-12 col-lg-8">
+        <h1>{{ movie.title }}</h1>
 
-<p>
-    {% if movie.director %}
-        Directed by {{ movie.director }}
-    {% endif %}
+        <p class="text-muted">
+            {% if movie.director %}
+            Directed by {{ movie.director }}
+            {% endif %}
 
-    {% if movie.release_year %}
-        | {{ movie.release_year }}
-    {% endif %}
-</p>
+            {% if movie.director and movie.release_year %}
+            |
+            {% endif %}
 
-<p>
-    Genres:
-    {% for genre in movie.genres.all %}
-        {{ genre.name }}{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-</p>
+            {% if movie.release_year %}
+            {{ movie.release_year }}
+            {% endif %}
+        </p>
+
+        <p>
+            <strong>Genres:</strong>
+            {% for genre in movie.genres.all %}
+            {{ genre.name }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+    </div>
+
+    <!--
+    Future poster column:
+    Add this back after the Movie model has a poster field.
+
+    <div class="col-12 col-lg-4">
+        <img src="{{ movie.poster.url }}" class="img-fluid rounded" alt="{{ movie.title }} poster">
+    </div>
+    -->
+</section>
 
 <hr>
 
 <h2>Reviews</h2>
 
 {% if reviews %}
-    {% for review in reviews %}
-        <article>
-            <p><strong>Rating:</strong> {{ review.rating }}/5</p>
-            <p>{{ review.review_text }}</p>
+{% for review in reviews %}
+<article>
+    <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+    <p>{{ review.review_text }}</p>
 
-            {% if review.author %}
-                <p><small>Reviewed by {{ review.author.username }}</small></p>
-            {% else %}
-                <p><small>Reviewed by a former user</small></p>
-            {% endif %}
-        </article>
-        <hr>
-    {% endfor %}
+    {% if review.author %}
+    <p><small>Reviewed by {{ review.author.username }}</small></p>
+    {% else %}
+    <p><small>Reviewed by a former user</small></p>
+    {% endif %}
+</article>
+<hr>
+{% endfor %}
 {% else %}
-    <p>No approved reviews yet.</p>
+<p>No approved reviews yet.</p>
 {% endif %}
 
 {% endblock %}

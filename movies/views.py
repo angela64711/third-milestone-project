@@ -8,7 +8,18 @@ from .models import Movie, Review
 
 
 def home(request):
-    return render(request, "movies/home.html")
+    """
+    Display the homepage with the latest approved movie recommendations.
+    """
+    latest_movies = Movie.objects.filter(approved=True).order_by("-created_on")[:4]
+
+    return render(
+        request,
+        "movies/index.html",
+        {
+            "latest_movies": latest_movies,
+        },
+    )
 
 
 # Browse Movies Page (Class view)

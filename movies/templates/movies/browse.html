@@ -1,11 +1,85 @@
-<h1>Browse Movies</h1>
+{% extends "base.html" %}
 
-{% for movie in object_list %}
-<p>
-    <a href="{% url 'movie_detail' movie.slug %}">
-        {{ movie.title }}
-    </a>
-</p>
-{% empty %}
-    <p>No approved movies yet.</p>
-{% endfor %}
+{% block content %}
+
+<section class="mb-4">
+    <h1>Browse Movies</h1>
+    <p class="text-muted">
+        Explore movie recommendations shared by Berlin’s international community.
+    </p>
+</section>
+
+<section>
+    <div class="row g-4">
+        {% for movie in object_list %}
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <h2 class="h5 card-title">
+                            {{ movie.title }}
+                        </h2>
+
+                        {% if movie.release_year %}
+                            <p class="text-muted mb-2">
+                                {{ movie.release_year }}
+                            </p>
+                        {% endif %}
+
+                        {% if movie.director %}
+                            <p class="card-text">
+                                Directed by {{ movie.director }}
+                            </p>
+                        {% endif %}
+
+                        <div class="mt-auto">
+                            <div class="bg-secondary-subtle d-flex align-items-center justify-content-center mx-auto mb-3 p-3 text-center"
+                                style="aspect-ratio: 2 / 3; width: 80%; max-height: 260px;">
+                                <span class="text-muted">Poster coming soon</span>
+                            </div>
+
+                            <a href="{% url 'movie_detail' movie.slug %}" class="btn btn-sm btn-primary">
+                                View details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col">
+                <p>No movie recommendations yet.</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% if is_paginated %}
+    <nav aria-label="Movie pagination" class="mt-5">
+        <ul class="pagination justify-content-center">
+
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                        Previous
+                    </a>
+                </li>
+            {% endif %}
+
+            <li class="page-item disabled">
+                <span class="page-link">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                        Next
+                    </a>
+                </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+{% endif %}
+
+{% endblock %}
