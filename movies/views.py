@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
-from .models import Movie
+from .models import Movie, Review
 
 # Create your views here.
 
@@ -33,3 +33,24 @@ class MovieList(generic.ListView):
     queryset = Movie.objects.filter(approved=True)
     template_name = "movies/browse.html"
     paginate_by = 8
+
+
+# Movie Details Page
+
+
+def movie_detail(request, slug):
+    """
+    Display an individual approved movie and its approved reviews.
+    """
+    movie = get_object_or_404(Movie, slug=slug, approved=True)
+
+    reviews = Review.objects.filter(movie=movie, approved=True).order_by("-created_on")
+
+    return render(
+        request,
+        "movies/movie_detail.html",
+        {
+            "movie": movie,
+            "reviews": reviews,
+        },
+    )

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ movie.title }}</h1>
+
+<p>
+    {% if movie.director %}
+        Directed by {{ movie.director }}
+    {% endif %}
+
+    {% if movie.release_year %}
+        | {{ movie.release_year }}
+    {% endif %}
+</p>
+
+<p>
+    Genres:
+    {% for genre in movie.genres.all %}
+        {{ genre.name }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>
+
+<hr>
+
+<h2>Reviews</h2>
+
+{% if reviews %}
+    {% for review in reviews %}
+        <article>
+            <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+            <p>{{ review.review_text }}</p>
+
+            {% if review.author %}
+                <p><small>Reviewed by {{ review.author.username }}</small></p>
+            {% else %}
+                <p><small>Reviewed by a former user</small></p>
+            {% endif %}
+        </article>
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>No approved reviews yet.</p>
+{% endif %}
+
+{% endblock %}
