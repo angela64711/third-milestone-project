@@ -19,54 +19,120 @@
             <div class="card shadow-sm">
                 <div class="card-body p-4">
 
+
                     <form method="post">
                         {% csrf_token %}
 
-                        {{ form.non_field_errors }}
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                        {% endif %}
 
-                        <div class="mb-3">
-                            {{ form.title.label_tag }}
-                            {{ form.title }}
-                            {{ form.title.errors }}
+                        <!-- Movie title -->
+                        <div class="row align-items-center mb-3">
+                            <label for="{{ form.title.id_for_label }}"
+                                class="col-12 col-md-3 form-label fw-semibold fs-6 mb-md-0">
+                                Movie title <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-12 col-md-9">
+                                {{ form.title }}
+                                {% if form.title.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.title.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            {{ form.genres.label_tag }}
+                        <!-- Director -->
+                        <div class="row align-items-center mb-3">
+                            <label for="{{ form.director.id_for_label }}"
+                                class="col-12 col-md-3 form-label fw-semibold fs-6 mb-md-0">
+                                Director 
+                            </label>
+                            <div class="col-12 col-md-9">
+                                {{ form.director }}
+                                {% if form.director.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.director.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Release year -->
+                        <div class="row align-items-center mb-3">
+                            <label for="{{ form.release_year.id_for_label }}"
+                                class="col-12 col-md-3 form-label fw-semibold fs-6 mb-md-0">
+                                Year
+                            </label>
+                            <div class="col-12 col-md-9">
+                                {{ form.release_year }}
+                                {% if form.release_year.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.release_year.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="row align-items-center mb-4">
+                            <label for="{{ form.rating.id_for_label }}"
+                                class="col-12 col-md-3 form-label fw-semibold fs-6 mb-md-0">
+                                Your rating <span class="text-danger">*</span>
+                            </label>
+                            <div class="col-12 col-md-9">
+                                {{ form.rating }}
+                                {% if form.rating.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.rating.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Genres -->
+                        <div class="mb-4">
+                            <label class="form-label d-block fw-semibold fs-6">
+                                Genres <span class="text-danger">*</span>
+                            </label>
+
                             <div class="form-text mb-2">
                                 {{ form.genres.help_text }}
                             </div>
-                            {{ form.genres }}
-                            {{ form.genres.errors }}
+
+                            <div class="genre-options">
+                                {{ form.genres }}
+                            </div>
+
+                            {% if form.genres.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.genres.errors }}
+                            </div>
+                            {% endif %}
                         </div>
 
-                        <div class="mb-3">
-                            {{ form.director.label_tag }}
-                            {{ form.director }}
-                            {{ form.director.errors }}
-                        </div>
-
-                        <div class="mb-3">
-                            {{ form.release_year.label_tag }}
-                            {{ form.release_year }}
-                            {{ form.release_year.errors }}
-                        </div>
-
-                        <div class="mb-3">
-                            {{ form.rating.label_tag }}
-                            {{ form.rating }}
-                            {{ form.rating.errors }}
-                        </div>
-
+                        <!-- Review text -->
                         <div class="mb-4">
-                            {{ form.review_text.label_tag }}
+                            <label for="{{ form.review_text.id_for_label }}"
+                                class="form-label d-block fw-semibold fs-6">
+                                Why would you recommend this movie? <span class="text-danger">*</span>
+                            </label>
+
                             {{ form.review_text }}
-                            {{ form.review_text.errors }}
+
+                            {% if form.review_text.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.review_text.errors }}
+                            </div>
+                            {% endif %}
                         </div>
 
                         <button type="submit" class="btn btn-primary">
                             Submit Recommendation
                         </button>
-
                     </form>
 
                 </div>

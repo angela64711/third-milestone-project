@@ -40,11 +40,12 @@ class SubmitMovieForm(forms.Form):
 
     rating = forms.ChoiceField(
         choices=[
-            (1, "1 - Bad"),
-            (2, "2 - Okay"),
-            (3, "3 - Good"),
-            (4, "4 - Very good"),
-            (5, "5 - Excellent"),
+            ("", "Choose a rating "),
+            (5, "Excellent"),
+            (4, "Great"),
+            (3, "Good"),
+            (2, "Okay"),
+            (1, "Not for me"),
         ],
         required=True,
         label="Your rating",
