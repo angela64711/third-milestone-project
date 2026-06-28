@@ -40,7 +40,7 @@ class SubmitMovieForm(forms.Form):
 
     rating = forms.ChoiceField(
         choices=[
-            (1, "1 - Poor"),
+            (1, "1 - Bad"),
             (2, "2 - Okay"),
             (3, "3 - Good"),
             (4, "4 - Very good"),
