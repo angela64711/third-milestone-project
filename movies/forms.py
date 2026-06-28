@@ -1,0 +1,76 @@
+from django import forms
+from .models import Genre
+
+
+class SubmitMovieForm(forms.Form):
+    """
+    Form for submitting a new movie recommendation.
+
+    This form collects data for two models:
+    - Movie
+    - Review
+    """
+
+    title = forms.CharField(
+        max_length=200,
+        required=True,
+        label="Movie title",
+    )
+
+    genres = forms.ModelMultipleChoiceField(
+        queryset=Genre.objects.all(),
+        required=True,
+        widget=forms.CheckboxSelectMultiple,
+        label="Genres",
+        help_text="Choose between 1 and 3 genres.",
+    )
+
+    director = forms.CharField(
+        max_length=200,
+        required=False,
+        label="Director",
+    )
+
+    release_year = forms.IntegerField(
+        required=False,
+        label="Release year",
+        min_value=1900,
+        max_value=2035,
+    )
+
+    rating = forms.ChoiceField(
+        choices=[
+            (1, "1 - Poor"),
+            (2, "2 - Okay"),
+            (3, "3 - Good"),
+            (4, "4 - Very good"),
+            (5, "5 - Excellent"),
+        ],
+        required=True,
+        label="Your rating",
+    )
+
+    review_text = forms.CharField(
+        required=True,
+        label="Why would you recommend this movie?",
+        min_length=20,
+        max_length=1000,
+        widget=forms.Textarea(
+            attrs={
+                "rows": 5,
+                "placeholder": "Tell the community why this movie is worth watching...",
+            }
+        ),
+    )
+
+    def clean_genres(self):
+        """
+        Ensure users choose between 1 and 3 genres.
+        """
+
+        genres = self.cleaned_data.get("genres")
+
+        if genres and genres.count() > 3:
+            raise forms.ValidationError("Please choose no more than 3 genres.")
+
+        return genres
