@@ -1,5 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
+
+from .forms import SubmitMovieForm
 from .models import Movie, Review
 
 # Create your views here.
@@ -63,5 +67,60 @@ def movie_detail(request, slug):
         {
             "movie": movie,
             "reviews": reviews,
+        },
+    )
+
+
+# Submit Movie Page
+
+
+@login_required
+def submit_movie(request):
+    """
+    Allow logged-in users to submit a new movie recommendation.
+
+    The form creates two records:
+    - one Movie
+    - one linked Review
+    """
+
+    if request.method == "POST":
+        form = SubmitMovieForm(request.POST)
+
+        if form.is_valid():
+            movie = Movie.objects.create(
+                title=form.cleaned_data["title"],
+                director=form.cleaned_data["director"],
+                release_year=form.cleaned_data["release_year"],
+                submitted_by=request.user,
+                approved=False,
+            )
+
+            movie.genres.set(form.cleaned_data["genres"])
+
+            Review.objects.create(
+                movie=movie,
+                author=request.user,
+                rating=form.cleaned_data["rating"],
+                review_text=form.cleaned_data["review_text"],
+                approved=False,
+                is_submission_review=True,
+            )
+
+            messages.success(
+                request,
+                "Thank you! Your movie recommendation has been submitted for review.",
+            )
+
+            return redirect("movie_list")
+
+    else:
+        form = SubmitMovieForm()
+
+    return render(
+        request,
+        "movies/submit_movie.html",
+        {
+            "form": form,
         },
     )

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Genre
+from .models import Genre, Movie
 
 
 class SubmitMovieForm(forms.Form):
@@ -62,6 +62,18 @@ class SubmitMovieForm(forms.Form):
             }
         ),
     )
+
+    def clean_title(self):
+        """
+        Check that the submitted movie title does not already exist.
+        """
+
+        title = self.cleaned_data.get("title")
+
+        if Movie.objects.filter(title__iexact=title).exists():
+            raise forms.ValidationError("This movie has already been submitted.")
+
+        return title
 
     def clean_genres(self):
         """
