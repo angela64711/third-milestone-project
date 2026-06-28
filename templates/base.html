@@ -1,3 +1,11 @@
+{% load static %}
+{% url 'home' as home_url %}
+{% url 'movie_list' as movie_list_url %}
+{% url 'submit_movie' as submit_movie_url %}
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+{% url 'account_logout' as logout_url %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,20 +33,24 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">
+                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" href="{{ home_url }}">
                             Home
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'movie_list' %}">
+                        <a class="nav-link {% if request.path == movie_list_url %}active{% endif %}"
+                            href="{{ movie_list_url }}">
                             Browse Movies
                         </a>
                     </li>
+
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <span class="nav-link disabled">
+                        <a class="nav-link {% if request.path == submit_movie_url %}active{% endif %}"
+                            href="{{ submit_movie_url }}">
                             Submit Movie
-                        </span>
+                        </a>
                     </li>
 
                     <li class="nav-item">
@@ -48,16 +60,25 @@
                     </li>
 
                     <li class="nav-item">
-                        <span class="nav-link disabled">
+                        <a class="nav-link {% if request.path == logout_url %}active{% endif %}"
+                            href="{{ logout_url }}">
+                            Logout
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == signup_url %}active{% endif %}"
+                            href="{{ signup_url }}">
                             Register
-                        </span>
+                        </a>
                     </li>
 
                     <li class="nav-item">
-                        <span class="nav-link disabled">
+                        <a class="nav-link {% if request.path == login_url %}active{% endif %}" href="{{ login_url }}">
                             Login
-                        </span>
+                        </a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
