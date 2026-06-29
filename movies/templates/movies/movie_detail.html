@@ -26,6 +26,10 @@
             {{ genre.name }}{% if not forloop.last %}, {% endif %}
             {% endfor %}
         </p>
+
+        {% if not user_review %}
+        <a href="#review-form" class="btn btn-primary mt-2">Write a review</a>
+        {% endif %}
     </div>
 
     <!--
@@ -42,9 +46,28 @@
 
 <h2>Reviews</h2>
 
+{% if user_review %}
+
+<section class="mb-4">
+    <h3>Your review</h3>
+    <article class="border rounded p-3">
+        <p><strong>Rating:</strong> {{ user_review.rating }}/5</p>
+        <p>{{ user_review.review_text }}</p>
+
+        {% if not user_review.approved %}
+        <p class="text-muted"><small>Your review is waiting for approval.</small></p>
+        {% endif %}
+    </article>
+</section>
+
+{% endif %}
+
 {% if reviews %}
 {% for review in reviews %}
-<article>
+
+{# Skip the current user's review here because it is displayed separately above. #}
+{% if review.id != user_review.id %}
+<article class="mb-3">
     <p><strong>Rating:</strong> {{ review.rating }}/5</p>
     <p>{{ review.review_text }}</p>
 
@@ -55,9 +78,22 @@
     {% endif %}
 </article>
 <hr>
+{% endif %}
 {% endfor %}
 {% else %}
 <p>No approved reviews yet.</p>
+{% endif %}
+
+{% if not user_review %}
+<section id="review-form" class="mt-5">
+    <h2>Write a review</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ review_form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit review</button>
+    </form>
+</section>
 {% endif %}
 
 {% endblock %}
