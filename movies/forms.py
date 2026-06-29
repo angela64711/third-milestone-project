@@ -88,41 +88,42 @@ class SubmitMovieForm(forms.Form):
 
         return genres
 
-    class ReviewForm(forms.ModelForm):
+
+class ReviewForm(forms.ModelForm):
+    """
+    Form for submitting a review for an existing movie.
+
+    This form collects data for the model: Review
+    """
+
+    rating = forms.ChoiceField(
+        choices=[
+            ("", "Choose a rating "),
+            (5, "Excellent"),
+            (4, "Great"),
+            (3, "Good"),
+            (2, "Okay"),
+            (1, "Not for me"),
+        ],
+        required=True,
+        label="Your rating",
+    )
+
+    review_text = forms.CharField(
+        required=True,
+        label="What do you think about this movie?",
+        widget=forms.Textarea(
+            attrs={
+                "rows": 5,
+                "placeholder": "Tell the community if this movie is worth watching...",
+            }
+        ),
+    )
+
+    class Meta:
         """
-        Form for submitting a review for an existing movie.
-
-        This form collects data for the model: Review
+        Specify the django model and order of the fields
         """
 
-        rating = forms.ChoiceField(
-            choices=[
-                ("", "Choose a rating "),
-                (5, "Excellent"),
-                (4, "Great"),
-                (3, "Good"),
-                (2, "Okay"),
-                (1, "Not for me"),
-            ],
-            required=True,
-            label="Your rating",
-        )
-
-        review_text = forms.CharField(
-            required=True,
-            label="What do you think about this movie?",
-            widget=forms.Textarea(
-                attrs={
-                    "rows": 5,
-                    "placeholder": "Tell the community if this movie is worth watching...",
-                }
-            ),
-        )
-
-        class Meta:
-            """
-            Specify the django model and order of the fields
-            """
-
-            model = Review
-            fields = ("rating", "review_text")
+        model = Review
+        fields = ("rating", "review_text")

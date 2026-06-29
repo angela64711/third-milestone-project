@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
 
-from .forms import SubmitMovieForm
+from .forms import SubmitMovieForm, ReviewForm
 from .models import Movie, Review
 
 # Create your views here.
@@ -124,3 +124,47 @@ def submit_movie(request):
             "form": form,
         },
     )
+
+
+# Movie Detail Page
+
+
+@login_required
+def movie_detail(request, slug):
+    """
+    Display one approved movie and handle normal review submission.
+    """
+
+    # Only approved movies can be accessed, even if someone guesses the URL.
+    movie = get_object_or_404(Movie, slug=slug, approved=True)
+
+    # Returns the user's existing review for this movie, if they have not reviewed it yet.
+    # filter() returns a QuerySet, so first() gives one review object or None.
+    user_review = Review.objects.filter(movie=movie, author=request.user).first()
+
+    reviews = Review.objects.filter(movie=movie, approved=True).order_by("-created_on")
+
+    if request.method == "POST" and user_review is None:
+        review_form = ReviewForm(request.POST)
+
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.movie = movie
+            review.author = request.user
+            review.approved = False
+            review.is_submission_review = False
+            review.save()
+
+            return redirect("movie_detail", slug=movie.slug)
+
+    else:
+        review_form = ReviewForm()
+
+    context = {
+        "movie": movie,
+        "reviews": reviews,
+        "review_form": review_form,
+        "user_review": user_review,
+    }
+
+    return render(request, "movies/movie_detail.html", context)
