@@ -168,3 +168,28 @@ def movie_detail(request, slug):
     }
 
     return render(request, "movies/movie_detail.html", context)
+
+
+# My Reviews Page
+
+
+@login_required
+def my_reviews(request):
+    """
+    Display all reviews written by the logged-in user.
+    Each review is shown together with its related movie.
+    """
+
+    # Show only reviews that are approved and linked to approved movies.
+    # Both filters are needed so unapproved content is not visible.
+    reviews = Review.objects.filter(
+        author=request.user,
+        approved=True,
+        movie__approved=True,
+    ).order_by("-created_on")
+
+    context = {
+        "reviews": reviews,
+    }
+
+    return render(request, "movies/my_reviews.html", context)

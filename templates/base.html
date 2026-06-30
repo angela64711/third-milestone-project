@@ -2,6 +2,7 @@
 {% url 'home' as home_url %}
 {% url 'movie_list' as movie_list_url %}
 {% url 'submit_movie' as submit_movie_url %}
+{% url 'my_reviews' as my_reviews_url %}
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
@@ -54,9 +55,10 @@
                     </li>
 
                     <li class="nav-item">
-                        <span class="nav-link disabled">
+                        <a class="nav-link {% if request.path == my_reviews_url %}active{% endif %}"
+                            href="{{ my_reviews_url }}">
                             My Reviews
-                        </span>
+                        </a>
                     </li>
 
                     <li class="nav-item">
