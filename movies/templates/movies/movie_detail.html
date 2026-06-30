@@ -40,6 +40,12 @@
         <img src="{{ movie.poster.url }}" class="img-fluid rounded" alt="{{ movie.title }} poster">
     </div>
     -->
+
+    <div class="mb-4">
+        {% if average_rating %}
+        <p class="fw-bold">Average rating: {{ average_rating}} / 5</p>
+        {% endif %}
+    </div>
 </section>
 
 <hr>

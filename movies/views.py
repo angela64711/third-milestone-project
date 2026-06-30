@@ -144,6 +144,20 @@ def movie_detail(request, slug):
 
     reviews = Review.objects.filter(movie=movie, approved=True).order_by("-created_on")
 
+    # Calculate average rating
+
+    review_count = reviews.count()
+
+    if review_count > 0:
+        total_rating = 0
+
+        for review in reviews:
+            total_rating += review.rating
+
+        average_rating = round(total_rating / review_count, 1)
+    else:
+        average_rating = None
+
     if request.method == "POST" and user_review is None:
         review_form = ReviewForm(request.POST)
 
@@ -165,6 +179,7 @@ def movie_detail(request, slug):
         "reviews": reviews,
         "review_form": review_form,
         "user_review": user_review,
+        "average_rating": average_rating,
     }
 
     return render(request, "movies/movie_detail.html", context)
