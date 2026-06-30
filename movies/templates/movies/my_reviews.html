@@ -38,9 +38,13 @@
                         {{ review.review_text }}
                     </p>
 
-                    <div>
+                    <div class="d-flex gap-2 mt-auto">
                         <a href="{% url 'movie_detail' review.movie.slug %}" class="btn btn-sm btn-outline-primary">
                             View movie
+                        </a>
+
+                        <a href="{% url 'edit_review' review.id %}" class="btn btn-sm btn-primary">
+                            Edit review
                         </a>
                     </div>
                 </div>

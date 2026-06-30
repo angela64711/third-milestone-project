@@ -193,3 +193,39 @@ def my_reviews(request):
     }
 
     return render(request, "movies/my_reviews.html", context)
+
+
+@login_required
+def edit_review(request, review_id):
+    """
+    Allow users to edit their own approved reviews.
+    Edited reviews require admin approval again.
+    """
+    review = get_object_or_404(
+        Review, id=review_id, author=request.user, approved=True, movie__approved=True
+    )
+
+    if request.method == "POST":
+        form = ReviewForm(request.POST, instance=review)
+
+        if form.is_valid():
+            edited_review = form.save(commit=False)
+            edited_review.approved = False
+            edited_review.save()
+
+            messages.success(
+                request,
+                "Your review has been updated and is waiting for approval.",
+            )
+
+            return redirect("my_reviews")
+
+    else:
+        form = ReviewForm(instance=review)
+
+    context = {
+        "form": form,
+        "review": review,
+    }
+
+    return render(request, "movies/edit_review.html", context)
