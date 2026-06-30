@@ -229,3 +229,33 @@ def edit_review(request, review_id):
     }
 
     return render(request, "movies/edit_review.html", context)
+
+
+# Delete Review Page
+
+
+@login_required
+def delete_review(request, review_id):
+    """
+    Allow users to delete their own normal reviews.
+    Original submission reviews cannot be deleted.
+    """
+    review = get_object_or_404(
+        Review,
+        id=review_id,
+        author=request.user,
+        approved=True,
+        movie__approved=True,
+        is_submission_review=False,
+    )
+
+    if request.method == "POST":
+        review.delete()
+        messages.success(request, "Your review has been deleted.")
+        return redirect("my_reviews")
+
+    context = {
+        "review": review,
+    }
+
+    return render(request, "movies/delete_review.html", context)

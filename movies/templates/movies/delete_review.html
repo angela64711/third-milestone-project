@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="mb-4">
+    <h1>Delete review</h1>
+    <p class="text-muted">
+        Are you sure you want to delete your review for {{ review.movie.title }}?
+    </p>
+</section>
+
+<section>
+    <div class="card">
+        <div class="card-body">
+            <h2 class="h5 card-title">
+                {{ review.movie.title }}
+            </h2>
+
+            <p>
+                <strong>Your rating:</strong> {{ review.rating }}/5
+            </p>
+
+            <p class="card-text">
+                {{ review.review_text }}
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <button type="submit" class="btn btn-danger">
+                    Yes, delete review
+                </button>
+
+                <a href="{% url 'my_reviews' %}" class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

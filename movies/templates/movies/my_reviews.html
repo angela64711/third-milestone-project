@@ -46,6 +46,12 @@
                         <a href="{% url 'edit_review' review.id %}" class="btn btn-sm btn-primary">
                             Edit review
                         </a>
+
+                        {% if not review.is_submission_review %}
+                        <a href="{% url 'delete_review' review.id %}" class="btn btn-sm btn-danger">
+                            Delete review
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
