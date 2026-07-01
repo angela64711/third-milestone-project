@@ -3,8 +3,8 @@
 {% block content %}
 
 <section class="mb-4">
-    <h1>My Reviews</h1>
-    <p class="text-muted">
+    <h1>My Reviews<span class="accent-dot"></span></h1>
+    <p>
         Manage the movie reviews you have submitted.
     </p>
 </section>
@@ -19,7 +19,7 @@
                         {{ review.movie.title }}
                     </h2>
 
-                    <p class="text-muted mb-2">
+                    <p class="mb-2">
                         {% if review.movie.release_year %}
                         {{ review.movie.release_year }}
                         {% endif %}
@@ -39,7 +39,7 @@
                     </p>
 
                     <div class="d-flex gap-2 mt-auto">
-                        <a href="{% url 'movie_detail' review.movie.slug %}" class="btn btn-sm btn-outline-primary">
+                        <a href="{% url 'movie_detail' review.movie.slug %}" class="btn btn-sm btn-outline">
                             View movie
                         </a>
 
@@ -48,7 +48,7 @@
                         </a>
 
                         {% if not review.is_submission_review %}
-                        <a href="{% url 'delete_review' review.id %}" class="btn btn-sm btn-danger">
+                        <a href="{% url 'delete_review' review.id %}" class="btn btn-sm btn-accent">
                             Delete review
                         </a>
                         {% endif %}

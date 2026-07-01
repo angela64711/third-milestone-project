@@ -3,13 +3,15 @@
 :root {
     --primary-font: "Google Sans Flex", sans-serif;
     --secondary-font: "Unbounded", sans-serif;
-    --background-color: #FFFFFF;
-    --surface-color: #D5D7D7;
-    --text-color: #2D3142;
-    --primary-color: #4A7291;
+    --background-color: #ffffff;
+    --surface-color: #e0e1e1;
+    --text-color: #2d3142;
+    --primary-color: #4a7291;
     --primary-rgb: 74, 114, 145;
-    --accent-color: #F18D5D; 
+    --accent-color: #f18d5d; 
 }
+
+/*---------------------------------- Global Styles */
 
 body,
 button,
@@ -30,6 +32,25 @@ h4,
     font-family: var(--secondary-font);
 }
 
+h1 {
+    color: var(--primary-color);
+}
+
+.card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+    color: var(--text-color);
+}
+
+.accent-link {
+    color: var(--accent-color);
+}
+
+.accent-link:hover {
+    color: var(--primary-color);
+}
 
 /*-------------------------------------------- NavBar */
 
@@ -71,19 +92,31 @@ h4,
     border: var(--accent-color);
 }
 
-.btn-outline-secondary {
-    border: var(--background-color);
+.btn-outline {
+    border:1px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.btn-accent {
+    background-color: var(--accent-color);
     color: var(--background-color);
 }
 
-.btn-outline-primary:hover {
-    /* hover state */
+.btn-accent:hover {
+    background-color: var(--primary-color);
+    color: var(--background-color);
 }
+
+
 
 /*----------------------------------- Hero Section */
 
 #hero {
-    color: var(--background-color);
     min-height: 60vh;
     background-image:
         linear-gradient(
@@ -96,6 +129,10 @@ h4,
     background-position: right center;
     background-repeat: no-repeat;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.hero-text {
+    color: var(--background-color);
 }
 
 .hero-content {
@@ -130,4 +167,8 @@ h4,
     width: 100%;
     aspect-ratio: 3 / 4;
     object-fit: cover;
+}
+
+#index-cards, .card-title {
+    color: var(--primary-color);
 }

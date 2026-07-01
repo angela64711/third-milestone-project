@@ -6,11 +6,11 @@
 <section id="hero" class="py-5 text-center bg-light rounded">
     <div class="container">
         <div class="hero-content">
-        <h1 class="display-5 fw-bold m-3">
+        <h1 class="display-5 fw-bold m-3 hero-text">
             Discover films with Berlin Movie Circle<span class="accent-dot"></span>
         </h1>
 
-        <p class="lead m-3">
+        <p class="lead m-3 hero-text">
             A community space for English-speaking expats and international residents in Berlin to recommend, rate, and
             review movies.
         </p>
@@ -39,12 +39,12 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
             <h2>Latest recommendations</h2>
-            <p class="mb-1">
+            <p class="mb-3">
                 The latest movie suggestions from the community.
             </p>
         </div>
 
-        <a href="{% url 'movie_list' %}" class="btn btn-outline-primary">
+        <a href="{% url 'movie_list' %}" class="btn btn-lg btn-outline">
             View all
         </a>
     </div>
@@ -59,7 +59,7 @@
                     </h3>
 
                     {% if movie.release_year %}
-                    <p class="text-muted mb-2">
+                    <p class="mb-2">
                         {{ movie.release_year }}
                     </p>
                     {% endif %}
@@ -91,7 +91,7 @@
     </div>
 </section>
 
-<section class="row g-4 mt-5">
+<section id="index-cards" class="row g-4 mt-5">
     <div class="col-md-4">
         <div class="card h-100">
             <div class="card-body">
@@ -126,8 +126,8 @@
     </div>
 </section>
 
-<section class="mt-5">
-    <h2>About Berlin Movie Circle</h2>
+<section class="my-5">
+    <h2>About Berlin Movie Circle<span class="accent-dot"></span></h2>
     <p>
         Berlin Movie Circle is a movie recommendation and review platform for English-speaking expats and international
         residents in Berlin. <br>
