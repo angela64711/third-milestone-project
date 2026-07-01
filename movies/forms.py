@@ -112,6 +112,7 @@ class ReviewForm(forms.ModelForm):
         ],
         required=True,
         label="Your rating",
+        widget=forms.Select(attrs={"class": "form-select"}),
     )
 
     review_text = forms.CharField(
@@ -119,6 +120,7 @@ class ReviewForm(forms.ModelForm):
         label="What do you think about this movie?",
         widget=forms.Textarea(
             attrs={
+                "class": "form-control",
                 "rows": 5,
                 "placeholder": "Tell the community if this movie is worth watching...",
             }

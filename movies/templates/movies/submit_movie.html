@@ -7,18 +7,14 @@
         <div class="col-12 col-lg-8">
 
             <div class="mb-4">
-                <h1>Submit a Movie Recommendation<span class="accent-dot"></span></h1>
-                <p class="lead">
+                <h1>Recommend a Movie<span class="accent-dot"></span></h1>
+                <p class="lead mt-3">
                     Share a movie you think other Berlin expats would enjoy.
-                </p>
-                <p>
-                    Your recommendation will be reviewed by the site admin before it appears publicly.
                 </p>
             </div>
 
             <div class="card shadow-sm">
                 <div class="card-body p-4">
-
 
                     <form method="post">
                         {% csrf_token %}
@@ -49,7 +45,7 @@
                         <div class="row align-items-center mb-3">
                             <label for="{{ form.director.id_for_label }}"
                                 class="col-12 col-md-3 form-label fw-semibold fs-6 mb-md-0">
-                                Director 
+                                Director
                             </label>
                             <div class="col-12 col-md-9">
                                 {{ form.director }}
@@ -131,8 +127,12 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">
-                            Submit Recommendation
+                            Submit Movie
                         </button>
+
+                        <p class="form-text mt-3 mb-0">
+                            Your recommendation will be reviewed before it appears publicly.
+                        </p>
                     </form>
 
                 </div>

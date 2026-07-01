@@ -98,7 +98,18 @@ h1 {
 .navbar-brand:focus {
     color: var(--accent-color);
 }
+.navbar-brand {
+    font-size: clamp(1rem, 5vw, 1.5rem)
+}
 
+.navbar-toggler {
+    border: none;
+    box-shadow: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-rgb), 0.25);
+}
 
 
 /*------------------------------------- Global Button Styles */
@@ -158,7 +169,6 @@ h1 {
 }
 
 .hero-content {
-    max-width: 50%;
     text-align: left;
 }
 
@@ -182,7 +192,7 @@ h1 {
 
 .poster-placeholder {
     width: 80%;
-    max-width: 180px;
+    max-width: 250px;
 }
 
 .poster-placeholder img {
@@ -200,4 +210,20 @@ h1 {
 
 .required-star {
     color: var(--accent-color);
+}
+
+/*------------------------------------------------ Signup Page */
+
+form input[type="text"],
+form input[type="password"],
+form input[type="email"] {
+    width: 100%;
+}
+
+/*--------------------------------------------- Media Queries */
+
+@media screen and (min-width: 768px) {
+    .hero-content {
+        max-width: 50%;
+    }
 }

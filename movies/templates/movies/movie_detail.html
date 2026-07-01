@@ -4,31 +4,26 @@
 
 <section class="row align-items-start mb-4">
     <div class="col-12 col-lg-8">
-        <h1>{{ movie.title }}</h1>
+        <h1 class="mb-4">{{ movie.title }}</h1>
 
         <p class="text-muted">
             {% if movie.director %}
             Directed by {{ movie.director }}
             {% endif %}
-
-            {% if movie.director and movie.release_year %}
-            |
-            {% endif %}
-
+        </p>
+        <p>
             {% if movie.release_year %}
             {{ movie.release_year }}
             {% endif %}
         </p>
-
         <p>
-            <strong>Genres:</strong>
             {% for genre in movie.genres.all %}
             {{ genre.name }}{% if not forloop.last %}, {% endif %}
             {% endfor %}
         </p>
 
         {% if not user_review %}
-        <a href="#review-form" class="btn btn-primary mt-2">Write a review</a>
+        <a href="#review-form" class="btn btn-primary mb-2">Write a review</a>
         {% endif %}
     </div>
 
@@ -41,7 +36,7 @@
     </div>
     -->
 
-    <div class="mb-3">
+    <div>
         {% if average_rating %}
         <p class="fw-bold">Average rating: {{ average_rating}} / 5</p>
         {% endif %}
@@ -55,7 +50,7 @@
 {% if user_review %}
 
 <section class="mb-4">
-    <h3>Your review</h3>
+    <h3 class="mb-3">Your review</h3>
     <article class="border rounded p-3">
         <p><strong>Rating:</strong> {{ user_review.rating }}/5</p>
         <p>{{ user_review.review_text }}</p>
@@ -91,8 +86,8 @@
 {% endif %}
 
 {% if not user_review %}
-<section id="review-form" class="mt-5">
-    <h2>Write a review</h2>
+<section id="review-form" class="mt-4">
+    <h2 class="mb-3">Write a Review<span class="accent-dot"></span></h2>
 
     <form method="POST">
         {% csrf_token %}

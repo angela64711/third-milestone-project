@@ -3,9 +3,9 @@
 {% block content %}
 
 <section class="mb-4">
-    <h1>Edit your review</h1>
-    <p class="text-muted">
-        Update your rating and review for {{ review.movie.title }}.
+    <h1 class="mb-3">Edit your review<span class="accent-dot"></span></h1>
+    <p>
+        Update your rating and review for this movie.
     </p>
 </section>
 
@@ -18,17 +18,16 @@
                         {{ review.movie.title }}
                     </h2>
 
-                    {% if review.movie.release_year or review.movie.director %}
-                        <p class="text-muted">
-                            {% if review.movie.release_year %}
-                                {{ review.movie.release_year }}
-                            {% endif %}
+                    {% if review.movie.director %}
+                    <p class="mb-1">
+                        Directed by {{ review.movie.director }}
+                    </p>
+                    {% endif %}
 
-                            {% if review.movie.director %}
-                                {% if review.movie.release_year %} | {% endif %}
-                                Directed by {{ review.movie.director }}
-                            {% endif %}
-                        </p>
+                    {% if review.movie.release_year %}
+                    <p>
+                        {{ review.movie.release_year }}
+                    </p>
                     {% endif %}
 
                     <form method="post">
@@ -39,9 +38,12 @@
                             Save changes
                         </button>
 
-                        <a href="{% url 'my_reviews' %}" class="btn btn-outline-secondary">
+                        <a href="{% url 'my_reviews' %}" class="btn btn-outline">
                             Cancel
                         </a>
+                        <p class="form-text mt-3 mb-0">
+                            Edits will be reviewed before they appear publicly again.
+                        </p>
                     </form>
                 </div>
             </div>
