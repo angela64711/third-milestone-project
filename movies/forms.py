@@ -15,6 +15,7 @@ class SubmitMovieForm(forms.Form):
         max_length=200,
         required=True,
         label="Movie title",
+        widget=forms.TextInput(attrs={"class": "form-control"}),
     )
 
     genres = forms.ModelMultipleChoiceField(
@@ -29,6 +30,7 @@ class SubmitMovieForm(forms.Form):
         max_length=200,
         required=False,
         label="Director",
+        widget=forms.TextInput(attrs={"class": "form-control"}),
     )
 
     release_year = forms.IntegerField(
@@ -36,6 +38,7 @@ class SubmitMovieForm(forms.Form):
         label="Release year",
         min_value=1900,
         max_value=2035,
+        widget=forms.NumberInput(attrs={"class": "form-control"}),
     )
 
     rating = forms.ChoiceField(
@@ -49,6 +52,7 @@ class SubmitMovieForm(forms.Form):
         ],
         required=True,
         label="Your rating",
+        widget=forms.Select(attrs={"class": "form-select"}),
     )
 
     review_text = forms.CharField(
@@ -58,6 +62,7 @@ class SubmitMovieForm(forms.Form):
         max_length=1000,
         widget=forms.Textarea(
             attrs={
+                "class": "form-control",
                 "rows": 5,
                 "placeholder": "Tell the community why this movie is worth watching...",
             }
