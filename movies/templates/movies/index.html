@@ -5,8 +5,9 @@
 
 <section id="hero" class="py-5 text-center bg-light rounded">
     <div class="container">
-        <h1 class="display-5 fw-bold">
-            Discover films with Berlin Movie Circle
+        <div class="hero-content">
+        <h1 class="display-5 fw-bold m-3">
+            Discover films with Berlin Movie Circle<span class="accent-dot"></span>
         </h1>
 
         <p class="lead m-3">
@@ -14,21 +15,22 @@
             review movies.
         </p>
 
-        <div class="mt-5 pt-4">
-            <a href="{% url 'movie_list' %}" class="btn btn-primary btn-lg">
+        <div class="d-flex gap-2 m-3 pt-4">
+            <a href="{% url 'movie_list' %}" class="btn btn-lg hero-btn">
                 Browse Movies
             </a>
 
             {% if user.is_authenticated %}
-            <a href="{% url 'submit_movie' %}" class="btn btn-outline-secondary btn-lg">
+            <a href="{% url 'submit_movie' %}" class="btn btn-lg hero-btn">
                 Submit a Movie
             </a>
             {% else %}
-            <a href="{% url 'account_signup' %}" class="btn btn-outline-secondary btn-lg">
+            <a href="{% url 'account_signup' %}" class="btn btn-lg hero-btn">
                 Join Community
             </a>
             {% endif %}
 
+        </div>
         </div>
     </div>
 </section>
