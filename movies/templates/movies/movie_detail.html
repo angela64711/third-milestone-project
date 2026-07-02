@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<section class="row align-items-start mb-4">
+<section class="row align-items-start mb-4 py-3">
     <div class="col-12 col-lg-8">
         <h1 class="mb-4">{{ movie.title }}</h1>
 
@@ -27,14 +27,12 @@
         {% endif %}
     </div>
 
-    <!--
-    Future poster column:
-    Add this back after the Movie model has a poster field.
-
-    <div class="col-12 col-lg-4">
-        <img src="{{ movie.poster.url }}" class="img-fluid rounded" alt="{{ movie.title }} poster">
+    {% if movie.poster_url %}
+    <div class="col-12 col-lg-4 text-center">
+        <img src="{{ movie.poster_url }}" class="img-fluid rounded movie-detail-poster"
+            alt="Poster for {{ movie.title }}">
     </div>
-    -->
+    {% endif %}
 
     <div>
         {% if average_rating %}

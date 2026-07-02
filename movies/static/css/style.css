@@ -212,6 +212,13 @@ h1 {
     color: var(--accent-color);
 }
 
+/*-------------------------------------------- Movie Detail Page */
+
+.movie-detail-poster {
+    max-width: 260px;
+    width: 100%;
+}
+
 /*------------------------------------------------ Signup Page */
 
 form input[type="text"],

@@ -72,9 +72,18 @@
                     {% endif %}
 
                     <div class="mt-auto">
-                        <div class="poster-placeholder d-flex align-items-center justify-content-center mx-auto mb-3 text-center">
-                            <img src="{% static 'images/camera.webp' %}" class="img-fluid h-100"
-                                alt="Cinema camera placeholder">
+                        <div
+                            class="poster-placeholder d-flex align-items-center justify-content-center mx-auto mb-3 text-center">
+                            <div
+                                class="poster-placeholder d-flex align-items-center justify-content-center mx-auto mb-3 text-center">
+                                {% if movie.poster_url %}
+                                <img src="{{ movie.poster_url }}" class="img-fluid h-100"
+                                    alt="Poster for {{ movie.title }}">
+                                {% else %}
+                                <img src="{% static 'images/camera.webp' %}" class="img-fluid h-100"
+                                    alt="Cinema camera placeholder">
+                                {% endif %}
+                            </div>
                         </div>
 
                         <a href="{% url 'movie_detail' movie.slug %}" class="btn btn-sm btn-primary">

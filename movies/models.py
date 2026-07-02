@@ -41,7 +41,7 @@ class Movie(models.Model):
         User, on_delete=models.SET_NULL, null=True, related_name="submitted_movies"
     )
     genres = models.ManyToManyField(Genre, related_name="movies")
-    # poster = CloudinaryField("image", default="placeholder")
+    poster_url = models.URLField(max_length=500, blank=True)
     director = models.CharField(max_length=200, blank=True)
     release_year = models.IntegerField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)

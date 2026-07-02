@@ -1,3 +1,6 @@
+import requests
+
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
@@ -7,6 +10,46 @@ from .forms import SubmitMovieForm, ReviewForm
 from .models import Movie, Review
 
 # Create your views here.
+
+
+def get_tmdb_poster_url(title):
+    """
+    Return a TMDB poster URL for a given movie title.
+
+    If no token, result, or poster path is found, return an empty string
+    so the templates can fall back to the placeholder image.
+    """
+    if not settings.TMDB_API_TOKEN:
+        return ""
+
+    url = "https://api.themoviedb.org/3/search/movie"
+
+    headers = {
+        "Authorization": f"Bearer {settings.TMDB_API_TOKEN}",
+    }
+
+    params = {
+        "query": title,
+    }
+
+    response = requests.get(url, headers=headers, params=params, timeout=10)
+
+    if response.status_code != 200:
+        return ""
+
+    data = response.json()
+    results = data.get("results")
+
+    if not results:
+        return ""
+
+    poster_path = results[0].get("poster_path")
+
+    if not poster_path:
+        return ""
+
+    return f"https://image.tmdb.org/t/p/w500{poster_path}"
+
 
 # Home Page
 
@@ -88,8 +131,11 @@ def submit_movie(request):
         form = SubmitMovieForm(request.POST)
 
         if form.is_valid():
+            poster_url = get_tmdb_poster_url(form.cleaned_data["title"])
+
             movie = Movie.objects.create(
                 title=form.cleaned_data["title"],
+                poster_url=poster_url,
                 director=form.cleaned_data["director"],
                 release_year=form.cleaned_data["release_year"],
                 submitted_by=request.user,
