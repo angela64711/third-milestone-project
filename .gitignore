@@ -2,3 +2,4 @@
 env.py
 db.sqlite3
 *.sqlite3
+README_draft.md

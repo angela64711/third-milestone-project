@@ -10,6 +10,36 @@
     </p>
 </section>
 
+<section class="mb-4">
+    <form method="get" class="row g-2 align-items-end">
+        <div class="col-md-5">
+            <label for="genre" class="form-label fw-semibold">Filter by genre:</label>
+            <select name="genre" id="genre" class="form-select">
+                <option value="">All genres</option>
+                {% for genre in genres %}
+                <option value="{{ genre.name }}" {% if selected_genre == genre.name %}selected{% endif %}>
+                    {{ genre.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label for="sort" class="form-label fw-semibold">Sort by:</label>
+            <select name="sort" id="sort" class="form-select">
+                <option value="">Newest first</option>
+                <option value="az" {% if selected_sort == "az" %}selected{% endif %}>
+                    A–Z
+                </option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-primary w-100">Apply</button>
+        </div>
+    </form>
+</section>
+
 <section>
     <div class="row g-4">
         {% for movie in object_list %}

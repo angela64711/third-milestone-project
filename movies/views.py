@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
 
 from .forms import SubmitMovieForm, ReviewForm
-from .models import Movie, Review
+from .models import Movie, Review, Genre
 
 # Create your views here.
 
@@ -89,9 +89,32 @@ class MovieList(generic.ListView):
     :template:`movies/browse.html`
     """
 
-    queryset = Movie.objects.filter(approved=True)
+    model = Movie
     template_name = "movies/browse.html"
     paginate_by = 12
+
+    def get_queryset(self):
+        queryset = Movie.objects.filter(approved=True)
+
+        genre = self.request.GET.get("genre")
+        sort = self.request.GET.get("sort")
+
+        if genre:
+            queryset = queryset.filter(genres__name=genre)
+
+        if sort == "az":
+            queryset = queryset.order_by("title")
+        else:
+            queryset = queryset.order_by("-created_on")
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["genres"] = Genre.objects.all()
+        context["selected_genre"] = self.request.GET.get("genre", "")
+        context["selected_sort"] = self.request.GET.get("sort", "")
+        return context
 
 
 # Movie Details Page

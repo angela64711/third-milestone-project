@@ -217,6 +217,7 @@ h1 {
 .movie-detail-poster {
     max-width: 260px;
     width: 100%;
+    box-shadow: 0 2px 6px var(--primary-color);
 }
 
 /*------------------------------------------------ Signup Page */
