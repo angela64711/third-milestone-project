@@ -189,6 +189,10 @@ h1 {
     color: var(--background-color);
 }
 
+.hero-btn:hover {
+    background-color: rgba(0, 0, 0, 0.35);
+    transform: translateY(-2px);
+}
 
 .poster-placeholder {
     width: 80%;
