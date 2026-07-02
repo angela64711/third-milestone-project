@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.html import format_html
+
 from .models import Genre, Movie, Review
 
 # Register your models here.
@@ -25,6 +27,15 @@ class MovieAdmin(admin.ModelAdmin):
     search_fields = ("title", "director", "submitted_by__username")
     filter_horizontal = ("genres",)
     prepopulated_fields = {"slug": ("title",)}
+    readonly_fields = ("poster_preview",)
+
+    def poster_preview(self, obj):
+        if obj.poster_url:
+            return format_html(
+                '<img src="{}" style="max-height: 250px; width: auto;" />',
+                obj.poster_url,
+            )
+        return "No poster available"
 
 
 @admin.register(Review)
