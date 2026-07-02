@@ -271,7 +271,7 @@ def my_reviews(request):
         author=request.user,
         approved=True,
         movie__approved=True,
-    ).order_by("-created_on")
+    ).order_by("movie__title")
 
     paginator = Paginator(reviews, 10)
     page_number = request.GET.get("page")

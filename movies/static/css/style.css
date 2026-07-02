@@ -194,6 +194,9 @@ h1 {
     transform: translateY(-2px);
 }
 
+
+/*------------------------------------------------ Poster Placeholder */
+
 .poster-placeholder {
     width: 80%;
     max-width: 250px;
@@ -234,7 +237,7 @@ form input[type="email"] {
 
 /*--------------------------------------------- Media Queries */
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
     .hero-content {
         max-width: 50%;
     }
