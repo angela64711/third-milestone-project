@@ -269,9 +269,60 @@ def my_reviews(request):
 
 
 @login_required
+def edit_movie(request, slug):
+    """
+    Allow users to edit movies they submitted.
+    Edited movies require admin approval again.
+    """
+
+    movie = get_object_or_404(
+        Movie,
+        slug=slug,
+        submitted_by=request.user,
+    )
+
+    if request.method == "POST":
+        form = EditMovieForm(request.POST, movie=movie)
+
+        if form.is_valid():
+            movie.title = form.cleaned_data["title"]
+            movie.director = form.cleaned_data["director"]
+            movie.release_year = form.cleaned_data["release_year"]
+            movie.approved = False
+            movie.save()
+
+            movie.genres.set(form.cleaned_data["genres"])
+
+            messages.success(
+                request,
+                "Your movie update has been submitted and is pending approval.",
+            )
+
+            return redirect("my_reviews")
+
+    else:
+        form = EditMovieForm(
+            movie=movie,
+            initial={
+                "title": movie.title,
+                "genres": movie.genres.all(),
+                "director": movie.director,
+                "release_year": movie.release_year,
+            },
+        )
+
+    context = {
+        "form": form,
+        "movie": movie,
+    }
+
+    return render(request, "movies/edit_movie.html", context)
+
+
+@login_required
 def edit_review(request, review_id):
     """
-    Allow users to edit their own approved reviews.
+    Allow users to edit their own reviews.
     Edited reviews require admin approval again.
     """
     review = get_object_or_404(
