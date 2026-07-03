@@ -1,6 +1,9 @@
 .venv
 env.py
-db.sqlite3
 *.sqlite3
-README_draft.md
-TESTING_draft.md
+*_draft.md
+__pycache__/
+*.py[cod]
+.DS_Store
+
+
