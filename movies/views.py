@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
 
-from .forms import SubmitMovieForm, ReviewForm
+from .forms import SubmitMovieForm, ReviewForm, EditMovieForm
 from .models import Movie, Review, Genre
 
 # Create your views here.

@@ -94,10 +94,77 @@ class SubmitMovieForm(forms.Form):
         return genres
 
 
+class EditMovieForm(forms.Form):
+    """
+    Form for editing an existing movie recommendation.
+    """
+
+    title = forms.CharField(
+        max_length=200,
+        required=True,
+        label="Movie title",
+        widget=forms.TextInput(attrs={"class": "form-control"}),
+    )
+
+    genres = forms.ModelMultipleChoiceField(
+        queryset=Genre.objects.all(),
+        required=True,
+        widget=forms.CheckboxSelectMultiple,
+        label="Genres",
+        help_text="Choose between 1 and 3 genres.",
+    )
+
+    director = forms.CharField(
+        max_length=200,
+        required=False,
+        label="Director",
+        widget=forms.TextInput(attrs={"class": "form-control"}),
+    )
+
+    release_year = forms.IntegerField(
+        required=False,
+        label="Release year",
+        min_value=1900,
+        max_value=2035,
+        widget=forms.NumberInput(attrs={"class": "form-control"}),
+    )
+
+    def __init__(self, *args, movie=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.movie = movie
+
+    def clean_title(self):
+        """
+        Check that the title is not already used by another movie.
+        """
+
+        title = self.cleaned_data.get("title")
+
+        existing_movie = Movie.objects.filter(title__iexact=title).exclude(
+            id=self.movie.id
+        )
+
+        if existing_movie.exists():
+            raise forms.ValidationError("This movie has already been submitted.")
+
+        return title
+
+    def clean_genres(self):
+        """
+        Ensure users choose between 1 and 3 genres.
+        """
+
+        genres = self.cleaned_data.get("genres")
+
+        if genres and genres.count() > 3:
+            raise forms.ValidationError("Please choose no more than 3 genres.")
+
+        return genres
+
+
 class ReviewForm(forms.ModelForm):
     """
     Form for submitting a review for an existing movie.
-
     This form collects data for the model: Review
     """
 
