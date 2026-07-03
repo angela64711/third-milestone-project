@@ -158,7 +158,7 @@ def submit_movie(request):
 
             messages.success(
                 request,
-                "Thank you! Your movie recommendation has been submitted for review.",
+                "Thank you! Your movie recommendation has been submitted and is pending approval.",
             )
 
             return redirect("movie_list")
@@ -218,6 +218,11 @@ def movie_detail(request, slug):
             review.is_submission_review = False
             review.save()
 
+            messages.success(
+                request,
+                "Your review has been submitted and is pending approval.",
+            )
+
             return redirect("movie_detail", slug=movie.slug)
 
     else:
@@ -234,22 +239,20 @@ def movie_detail(request, slug):
     return render(request, "movies/movie_detail.html", context)
 
 
-# My Reviews Page
+# My Activity Page
 
 
 @login_required
 def my_reviews(request):
     """
-    Display all reviews written by the logged-in user.
-    Each review is shown together with its related movie.
+    Display activity for the logged-in user:
+    movies they submitted and reviews they wrote.
     """
 
-    # Show only reviews that are approved and linked to approved movies.
-    # Both filters are needed so unapproved content is not visible.
+    my_movies = Movie.objects.filter(submitted_by=request.user).order_by("title")
+
     reviews = Review.objects.filter(
         author=request.user,
-        approved=True,
-        movie__approved=True,
     ).order_by("movie__title")
 
     paginator = Paginator(reviews, 10)
@@ -257,6 +260,7 @@ def my_reviews(request):
     page_obj = paginator.get_page(page_number)
 
     context = {
+        "my_movies": my_movies,
         "reviews": reviews,
         "page_obj": page_obj,
     }
@@ -271,7 +275,9 @@ def edit_review(request, review_id):
     Edited reviews require admin approval again.
     """
     review = get_object_or_404(
-        Review, id=review_id, author=request.user, approved=True, movie__approved=True
+        Review,
+        id=review_id,
+        author=request.user,
     )
 
     if request.method == "POST":
@@ -284,7 +290,7 @@ def edit_review(request, review_id):
 
             messages.success(
                 request,
-                "Your review has been updated and is waiting for approval.",
+                "Your review has been updated and is pending approval.",
             )
 
             return redirect("my_reviews")
@@ -306,16 +312,13 @@ def edit_review(request, review_id):
 @login_required
 def delete_review(request, review_id):
     """
-    Allow users to delete their own normal reviews.
-    Original submission reviews cannot be deleted.
+    Allow users to delete any review they authored.
     """
     review = get_object_or_404(
         Review,
         id=review_id,
         author=request.user,
         approved=True,
-        movie__approved=True,
-        is_submission_review=False,
     )
 
     if request.method == "POST":
