@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="container py-3">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+
+            <div class="mb-4">
+                <h1>Edit Your Movie Recommendation<span class="accent-dot"></span></h1>
+                <p class="lead mt-3">
+                    Need to correct or update something? Edit the details below.
+                </p>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <p class="form-text text-muted mb-3">
+                        Fields marked with <span class="required-star">*</span> are required.
+                    </p>
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                        {% endif %}
+
+                        <!-- Movie title -->
+                        <div class="row align-items-center mb-3">
+                            <label for="{{ form.title.id_for_label }}"
+                                class="col-12 col-md-3 form-label fw-semibold fs-6 mb-md-0">
+                                Movie title <span class="required-star">*</span>
+                            </label>
+                            <div class="col-12 col-md-9">
+                                {{ form.title }}
+                                {% if form.title.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.title.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Director -->
+                        <div class="row align-items-center mb-3">
+                            <label for="{{ form.director.id_for_label }}"
+                                class="col-12 col-md-3 form-label fw-semibold fs-6 mb-md-0">
+                                Director
+                            </label>
+                            <div class="col-12 col-md-9">
+                                {{ form.director }}
+                                {% if form.director.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.director.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Release year -->
+                        <div class="row align-items-center mb-3">
+                            <label for="{{ form.release_year.id_for_label }}"
+                                class="col-12 col-md-3 form-label fw-semibold fs-6 mb-md-0">
+                                Year
+                            </label>
+                            <div class="col-12 col-md-9">
+                                {{ form.release_year }}
+                                {% if form.release_year.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ form.release_year.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Genres -->
+                        <div class="mb-4">
+                            <label class="form-label d-block fw-semibold fs-6">
+                                Genres <span class="required-star">*</span>
+                            </label>
+
+                            <div class="form-text mb-2">
+                                {{ form.genres.help_text }}
+                            </div>
+
+                            <div class="genre-options">
+                                {{ form.genres }}
+                            </div>
+
+                            {% if form.genres.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.genres.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Submit Update
+                        </button>
+
+                        <a href="{% url 'my_reviews' %}" class="btn btn-outline ms-2">
+                            Cancel
+                        </a>
+
+                        <p class="form-text mt-3 mb-0">
+                            Your update will be reviewed before it appears publicly.
+                        </p>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
