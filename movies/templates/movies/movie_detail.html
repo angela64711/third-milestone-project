@@ -54,7 +54,11 @@
         <p>{{ user_review.review_text }}</p>
 
         {% if not user_review.approved %}
-        <p class="text-muted"><small>Your review is waiting for approval.</small></p>
+        <p class="text-muted">
+            <span class="badge badge-pill badge-danger">
+                Pending Approval
+            </span>
+        </p>
         {% endif %}
     </article>
 </section>
