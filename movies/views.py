@@ -117,27 +117,6 @@ class MovieList(generic.ListView):
         return context
 
 
-# Movie Details Page
-
-
-def movie_detail(request, slug):
-    """
-    Display an individual approved movie and its approved reviews.
-    """
-    movie = get_object_or_404(Movie, slug=slug, approved=True)
-
-    reviews = Review.objects.filter(movie=movie, approved=True).order_by("-created_on")
-
-    return render(
-        request,
-        "movies/movie_detail.html",
-        {
-            "movie": movie,
-            "reviews": reviews,
-        },
-    )
-
-
 # Submit Movie Page
 
 
