@@ -118,6 +118,8 @@ class ReviewForm(forms.ModelForm):
     review_text = forms.CharField(
         required=True,
         label="What do you think about this movie?",
+        min_length=20,
+        max_length=1000,
         widget=forms.Textarea(
             attrs={
                 "class": "form-control",
