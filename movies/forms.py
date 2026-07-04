@@ -34,7 +34,7 @@ class SubmitMovieForm(forms.Form):
     )
 
     release_year = forms.IntegerField(
-        required=False,
+        required=True,
         label="Release year",
         min_value=1900,
         max_value=2035,
@@ -122,7 +122,7 @@ class EditMovieForm(forms.Form):
     )
 
     release_year = forms.IntegerField(
-        required=False,
+        required=True,
         label="Release year",
         min_value=1900,
         max_value=2035,

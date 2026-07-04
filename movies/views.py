@@ -13,9 +13,9 @@ from .models import Movie, Review, Genre
 # Create your views here.
 
 
-def get_tmdb_poster_url(title):
+def get_tmdb_poster_url(title, release_year=None):
     """
-    Return a TMDB poster URL for a given movie title.
+    Return a TMDB poster URL for a given movie title and release year.
 
     If no token, result, or poster path is found, return an empty string
     so the templates can fall back to the placeholder image.
@@ -33,13 +33,17 @@ def get_tmdb_poster_url(title):
         "query": title,
     }
 
-    response = requests.get(url, headers=headers, params=params, timeout=10)
+    if release_year:
+        params["primary_release_year"] = release_year
 
-    if response.status_code != 200:
+    try:
+        response = requests.get(url, headers=headers, params=params, timeout=10)
+        response.raise_for_status()
+    except requests.RequestException:
         return ""
 
     data = response.json()
-    results = data.get("results")
+    results = data.get("results", [])
 
     if not results:
         return ""
@@ -134,7 +138,10 @@ def submit_movie(request):
         form = SubmitMovieForm(request.POST)
 
         if form.is_valid():
-            poster_url = get_tmdb_poster_url(form.cleaned_data["title"])
+            poster_url = get_tmdb_poster_url(
+                form.cleaned_data["title"],
+                form.cleaned_data["release_year"],
+            )
 
             movie = Movie.objects.create(
                 title=form.cleaned_data["title"],
@@ -285,9 +292,19 @@ def edit_movie(request, slug):
         form = EditMovieForm(request.POST, movie=movie)
 
         if form.is_valid():
+            old_title = movie.title
+            old_release_year = movie.release_year
+
             movie.title = form.cleaned_data["title"]
             movie.director = form.cleaned_data["director"]
             movie.release_year = form.cleaned_data["release_year"]
+
+            if movie.title != old_title or movie.release_year != old_release_year:
+                movie.poster_url = get_tmdb_poster_url(
+                    movie.title,
+                    movie.release_year,
+                )
+
             movie.approved = False
             movie.save()
 
