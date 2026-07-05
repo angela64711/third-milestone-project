@@ -228,6 +228,32 @@ h1 {
 .required-star {
     color: var(--accent-color);
 }
+/*---------------- Turns the genre options into a grid
+to display 1, 2 or 3 columns, based on screen width  */
+
+.genre-options > div {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.5rem 1rem;
+}
+
+@media (min-width: 576px) {
+    .genre-options > div {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .genre-options > div {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.genre-options label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
 
 /*-------------------------------------------- Movie Detail Page */
 
