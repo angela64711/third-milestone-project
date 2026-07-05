@@ -74,6 +74,11 @@ h1 {
     box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.25);
 }
 
+.form-label {
+    color: var(--text-color);
+}
+
+
 
 .badge-danger {
     background-color: var(--accent-color);

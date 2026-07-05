@@ -13,7 +13,7 @@
 <section class="mb-4">
     <form method="get" class="row g-2 align-items-end">
         <div class="col-md-5">
-            <label for="genre" class="form-label fw-semibold">Filter by genre:</label>
+            <label for="genre" class="form-label fw-semibold"><i class="fa-solid fa-filter me-1"></i>Filter by genre:</label>
             <select name="genre" id="genre" class="form-select">
                 <option value="">All genres</option>
                 {% for genre in genres %}
@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-md-4">
-            <label for="sort" class="form-label fw-semibold">Sort by:</label>
+            <label for="sort" class="form-label fw-semibold"><i class="fa-solid fa-sort me-1"></i>Sort by:</label>
             <select name="sort" id="sort" class="form-select">
                 <option value="">Recently added</option>
                 <option value="az" {% if selected_sort == "az" %}selected{% endif %}>

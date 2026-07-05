@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .forms import SubmitMovieForm, ReviewForm
+from .forms import SubmitMovieForm, ReviewForm, EditMovieForm
 from .models import Genre, Movie
 
 
@@ -71,6 +71,93 @@ class SubmitMovieFormTest(TestCase):
                 "rating": 5,
                 "review_text": "This is a creative and emotional movie recommendation.",
             }
+        )
+
+        self.assertFalse(form.is_valid())
+
+
+class EditMovieFormTest(TestCase):
+    def test_edit_movie_form_is_valid(self):
+        """
+        Test that the edit movie form is valid with correct data.
+        """
+        genre = Genre.objects.create(name="Drama")
+        movie = Movie.objects.create(title="Past Lives", submitted_by=None)
+
+        form = EditMovieForm(
+            data={
+                "title": "Past Lives",
+                "genres": [genre.id],
+                "director": "Celine Song",
+                "release_year": 2023,
+            },
+            movie=movie,
+        )
+
+        self.assertTrue(form.is_valid())
+
+    def test_edit_movie_form_allows_same_movie_title(self):
+        """
+        Test that keeping the same title on the same movie is allowed.
+        """
+        genre = Genre.objects.create(name="Drama")
+        movie = Movie.objects.create(title="Past Lives", submitted_by=None)
+
+        form = EditMovieForm(
+            data={
+                "title": "Past Lives",
+                "genres": [genre.id],
+                "director": "Celine Song",
+                "release_year": 2023,
+            },
+            movie=movie,
+        )
+
+        self.assertTrue(form.is_valid())
+
+    def test_edit_movie_form_rejects_duplicate_title_from_another_movie(self):
+        """
+        Test that a movie cannot be edited to use another movie's title.
+        """
+        genre = Genre.objects.create(name="Thriller")
+        movie = Movie.objects.create(title="Past Lives", submitted_by=None)
+        Movie.objects.create(title="The Departed", submitted_by=None)
+
+        form = EditMovieForm(
+            data={
+                "title": "The Departed",
+                "genres": [genre.id],
+                "director": "Martin Scorsese",
+                "release_year": 2006,
+            },
+            movie=movie,
+        )
+
+        self.assertFalse(form.is_valid())
+
+    def test_edit_movie_form_rejects_more_than_three_genres(self):
+        """
+        Test that users cannot choose more than 3 genres when editing.
+        """
+        genre_1 = Genre.objects.create(name="Drama")
+        genre_2 = Genre.objects.create(name="Comedy")
+        genre_3 = Genre.objects.create(name="Romance")
+        genre_4 = Genre.objects.create(name="Action")
+        movie = Movie.objects.create(title="Past Lives", submitted_by=None)
+
+        form = EditMovieForm(
+            data={
+                "title": "Past Lives",
+                "genres": [
+                    genre_1.id,
+                    genre_2.id,
+                    genre_3.id,
+                    genre_4.id,
+                ],
+                "director": "Celine Song",
+                "release_year": 2023,
+            },
+            movie=movie,
         )
 
         self.assertFalse(form.is_valid())
