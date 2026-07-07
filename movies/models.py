@@ -38,7 +38,10 @@ class Movie(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
     submitted_by = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, related_name="submitted_movies"
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name="submitted_movies",
     )
     genres = models.ManyToManyField(Genre, related_name="movies")
     poster_url = models.URLField(max_length=500, blank=True)
@@ -68,9 +71,11 @@ class Review(models.Model):
     """
 
     author = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, related_name="movie_reviews"
+        User, on_delete=models.SET_NULL, null=True, related_name="movie_reviews"  # noqa
     )
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="reviews")
+    movie = models.ForeignKey(
+        Movie, on_delete=models.CASCADE, related_name="reviews"  # noqa
+    )
     rating = models.IntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(5)]
     )

@@ -105,7 +105,7 @@ class SubmitMovieViewTest(TestCase):
                 "director": "Celine Song",
                 "release_year": 2023,
                 "rating": 5,
-                "review_text": "This is a thoughtful and beautiful movie recommendation.",
+                "review_text": "This is a thoughtful and beautiful movie.",
             },
         )
 
@@ -155,7 +155,7 @@ class MyActivityViewTest(TestCase):
         response = self.client.get(reverse("my_reviews"))
 
         self.assertContains(response, "Past Lives")
-        self.assertContains(response, "This is a thoughtful and useful movie review.")
+        self.assertContains(response, "This is a thoughtful movie review.")
 
 
 class EditReviewViewTest(TestCase):
@@ -185,7 +185,12 @@ class EditReviewViewTest(TestCase):
         """
         self.client.login(username="testuser", password="testpass123")
 
-        response = self.client.get(reverse("edit_review", args=[self.review.id]))
+        response = self.client.get(
+            reverse(
+                "edit_review",
+                args=[self.review.id],
+            )
+        )
 
         self.assertEqual(response.status_code, 200)
 
@@ -199,7 +204,7 @@ class EditReviewViewTest(TestCase):
             reverse("edit_review", args=[self.review.id]),
             {
                 "rating": 4,
-                "review_text": "This is the updated review text after editing.",
+                "review_text": "This is the updated review after editing.",
             },
         )
 
@@ -241,7 +246,12 @@ class DeleteReviewViewTest(TestCase):
         """
         self.client.login(username="testuser", password="testpass123")
 
-        response = self.client.get(reverse("delete_review", args=[self.review.id]))
+        response = self.client.get(
+            reverse(
+                "delete_review",
+                args=[self.review.id],
+            )
+        )
 
         self.assertEqual(response.status_code, 200)
 
@@ -251,7 +261,12 @@ class DeleteReviewViewTest(TestCase):
         """
         self.client.login(username="testuser", password="testpass123")
 
-        response = self.client.post(reverse("delete_review", args=[self.review.id]))
+        response = self.client.post(
+            reverse(
+                "delete_review",
+                args=[self.review.id],
+            )
+        )
 
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Review.objects.count(), 0)
@@ -282,8 +297,12 @@ class EditMovieViewTest(TestCase):
         """
         self.client.login(username="testuser", password="testpass123")
 
-        response = self.client.get(reverse("edit_movie", args=[self.movie.slug]))
-
+        response = self.client.get(
+            reverse(
+                "edit_movie",
+                args=[self.movie.slug],
+            )
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_edit_movie_post_updates_movie_and_sets_unapproved(self):
@@ -338,31 +357,46 @@ class OwnershipProtectionViewTest(TestCase):
 
     def test_user_cannot_edit_another_users_movie(self):
         """
-        Test that users cannot access the edit page for movies they did not submit.
+        Test that users cannot access the edit page
+        for movies they did not submit.
         """
         self.client.login(username="otheruser", password="testpass123")
 
-        response = self.client.get(reverse("edit_movie", args=[self.movie.slug]))
+        response = self.client.get(
+            reverse(
+                "edit_movie",
+                args=[self.movie.slug],
+            )
+        )
 
         self.assertEqual(response.status_code, 404)
 
     def test_user_cannot_edit_another_users_review(self):
         """
-        Test that users cannot access the edit page for reviews they did not write.
+        Test that users cannot access the edit page
+        for reviews they did not write.
         """
         self.client.login(username="otheruser", password="testpass123")
 
-        response = self.client.get(reverse("edit_review", args=[self.review.id]))
+        response = self.client.get(
+            reverse(
+                "edit_review",
+                args=[self.review.id],
+            )
+        )
 
         self.assertEqual(response.status_code, 404)
 
     def test_user_cannot_delete_another_users_review(self):
         """
-        Test that users cannot access the delete page for reviews they did not write.
+        Test that users cannot access the delete page
+        for reviews they did not write.
         """
         self.client.login(username="otheruser", password="testpass123")
 
-        response = self.client.get(reverse("delete_review", args=[self.review.id]))
+        response = self.client.get(
+            reverse("delete_review", args=[self.review.id]),
+        )
 
         self.assertEqual(response.status_code, 404)
 

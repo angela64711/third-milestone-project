@@ -18,7 +18,10 @@ class MovieModelTest(TestCase):
         """
         Test that the Movie string method returns the movie title.
         """
-        user = User.objects.create_user(username="testuser", password="testpass")
+        user = User.objects.create_user(
+            username="testuser",
+            password="testpass",
+        )
         movie = Movie.objects.create(
             title="Inception",
             submitted_by=user,
@@ -30,7 +33,10 @@ class MovieModelTest(TestCase):
         """
         Test that a slug is automatically created from the movie title.
         """
-        user = User.objects.create_user(username="testuser2", password="testpass")
+        user = User.objects.create_user(
+            username="testuser2",
+            password="testpass",
+        )
         movie = Movie.objects.create(
             title="The Grand Budapest Hotel",
             submitted_by=user,
@@ -44,7 +50,10 @@ class ReviewModelTest(TestCase):
         """
         Test that the Review string method returns movie and author.
         """
-        user = User.objects.create_user(username="testuser3", password="testpass")
+        user = User.objects.create_user(
+            username="testuser3",
+            password="testpass",
+        )
         movie = Movie.objects.create(
             title="Arrival",
             submitted_by=user,
@@ -53,7 +62,7 @@ class ReviewModelTest(TestCase):
             author=user,
             movie=movie,
             rating=5,
-            review_text="This is a thoughtful and excellent science fiction film.",
+            review_text="This is a thoughtful and deep science fiction film.",
         )
 
         self.assertEqual(str(review), "Arrival | review by testuser3")
@@ -62,7 +71,10 @@ class ReviewModelTest(TestCase):
         """
         Test that one user cannot create two reviews for the same movie.
         """
-        user = User.objects.create_user(username="testuser4", password="testpass")
+        user = User.objects.create_user(
+            username="testuser4",
+            password="testpass",
+        )
         movie = Movie.objects.create(
             title="Get Out",
             submitted_by=user,
@@ -72,7 +84,7 @@ class ReviewModelTest(TestCase):
             author=user,
             movie=movie,
             rating=5,
-            review_text="This is a smart and memorable thriller with great tension.",
+            review_text="This is a memorable thriller with great tension.",
         )
 
         with self.assertRaises(IntegrityError):
@@ -80,5 +92,5 @@ class ReviewModelTest(TestCase):
                 author=user,
                 movie=movie,
                 rating=4,
-                review_text="This is a second review and should not be allowed.",
+                review_text="This is a second review and not be allowed.",
             )

@@ -37,7 +37,12 @@ def get_tmdb_poster_url(title, release_year=None):
         params["primary_release_year"] = release_year
 
     try:
-        response = requests.get(url, headers=headers, params=params, timeout=10)
+        response = requests.get(
+            url,
+            headers=headers,
+            params=params,
+            timeout=10,
+        )
         response.raise_for_status()
     except requests.RequestException:
         return ""
@@ -63,7 +68,11 @@ def home(request):
     """
     Display the homepage with the latest approved movie recommendations.
     """
-    latest_movies = Movie.objects.filter(approved=True).order_by("-created_on")[:4]
+    latest_movies = Movie.objects.filter(
+        approved=True,
+    ).order_by(
+        "-created_on"
+    )[:4]
 
     return render(
         request,
@@ -165,7 +174,8 @@ def submit_movie(request):
 
             messages.success(
                 request,
-                "Thank you! Your movie recommendation has been submitted and is pending approval.",
+                "Thank you! Your movie recommendation has been "
+                "submitted and is pending approval.",
             )
 
             return redirect("movie_list")
@@ -194,11 +204,18 @@ def movie_detail(request, slug):
     # Only approved movies can be accessed, even if someone guesses the URL.
     movie = get_object_or_404(Movie, slug=slug, approved=True)
 
-    # Returns the user's existing review for this movie, if they have not reviewed it yet.
+    # Returns the user's existing review for this movie,
+    # if they have not reviewed it yet.
     # filter() returns a QuerySet, so first() gives one review object or None.
-    user_review = Review.objects.filter(movie=movie, author=request.user).first()
+    user_review = Review.objects.filter(
+        movie=movie,
+        author=request.user,
+    ).first()
 
-    reviews = Review.objects.filter(movie=movie, approved=True).order_by("-created_on")
+    reviews = Review.objects.filter(
+        movie=movie,
+        approved=True,
+    ).order_by("-created_on")
 
     # Calculate average rating
 
@@ -256,7 +273,9 @@ def my_reviews(request):
     movies they submitted and reviews they wrote.
     """
 
-    my_movies = Movie.objects.filter(submitted_by=request.user).order_by("title")
+    my_movies = Movie.objects.filter(
+        submitted_by=request.user,
+    ).order_by("title")
 
     reviews = Review.objects.filter(
         author=request.user,
@@ -299,7 +318,10 @@ def edit_movie(request, slug):
             movie.director = form.cleaned_data["director"]
             movie.release_year = form.cleaned_data["release_year"]
 
-            if movie.title != old_title or movie.release_year != old_release_year:
+            title_changed = movie.title != old_title
+            year_changed = movie.release_year != old_release_year
+
+            if title_changed or year_changed:
                 movie.poster_url = get_tmdb_poster_url(
                     movie.title,
                     movie.release_year,
@@ -310,9 +332,13 @@ def edit_movie(request, slug):
 
             movie.genres.set(form.cleaned_data["genres"])
 
+            success_message = (
+                "Your movie update has been submitted and is pending approval."
+            )
+
             messages.success(
                 request,
-                "Your movie update has been submitted and is pending approval.",
+                success_message,
             )
 
             return redirect("my_reviews")

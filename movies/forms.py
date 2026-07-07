@@ -64,7 +64,9 @@ class SubmitMovieForm(forms.Form):
             attrs={
                 "class": "form-control",
                 "rows": 5,
-                "placeholder": "Tell the community why this movie is worth watching...",
+                "placeholder": (
+                    "Tell the community why this movie is worth watching..."
+                ),
             }
         ),
     )
@@ -77,7 +79,8 @@ class SubmitMovieForm(forms.Form):
         title = self.cleaned_data.get("title")
 
         if Movie.objects.filter(title__iexact=title).exists():
-            raise forms.ValidationError("This movie has already been submitted.")
+            message = "This movie has already been submitted."
+            raise forms.ValidationError(message)
 
         return title
 
@@ -145,7 +148,8 @@ class EditMovieForm(forms.Form):
         )
 
         if existing_movie.exists():
-            raise forms.ValidationError("This movie has already been submitted.")
+            message = "This movie has already been submitted."
+            raise forms.ValidationError(message)
 
         return title
 
@@ -191,7 +195,9 @@ class ReviewForm(forms.ModelForm):
             attrs={
                 "class": "form-control",
                 "rows": 5,
-                "placeholder": "Tell the community if this movie is worth watching...",
+                "placeholder": (
+                    "Tell the community if this movie is worth watching..."
+                ),
             }
         ),
     )

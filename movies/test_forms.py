@@ -18,7 +18,9 @@ class SubmitMovieFormTest(TestCase):
                 "director": "Celine Song",
                 "release_year": 2023,
                 "rating": 5,
-                "review_text": "This is a beautiful and thoughtful movie recommendation.",
+                "review_text": (
+                    "This is a beautiful and thoughtful movie recommendation."
+                ),
             }
         )
 
@@ -42,7 +44,9 @@ class SubmitMovieFormTest(TestCase):
                 "director": "Martin Scorsese",
                 "release_year": 2006,
                 "rating": 5,
-                "review_text": "This is a strong crime thriller with excellent performances.",
+                "review_text": (
+                    "This is a strong crime thriller with great performances."
+                ),
             }
         )
 
@@ -69,7 +73,9 @@ class SubmitMovieFormTest(TestCase):
                 "director": "Daniel Kwan and Daniel Scheinert",
                 "release_year": 2022,
                 "rating": 5,
-                "review_text": "This is a creative and emotional movie recommendation.",
+                "review_text": (
+                    "This is a creative and emotional movie recommendation."
+                ),
             }
         )
 
