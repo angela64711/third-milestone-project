@@ -79,7 +79,7 @@ h1 {
 }
 
 
-
+/*--------------------------- Pending Approval Badge */
 .badge-danger {
     background-color: var(--accent-color);
 }

@@ -27,6 +27,11 @@ I have used the recommended [HTML W3C Validator](https://validator.w3.org) to va
 | templates | [logout.html](https://github.com/angela64711/third-milestone-project/blob/main/templates/account/logout.html) | N/A - validated by input from rendered source. | ![screenshot](documentation/validation/html-templates-logout.png) | Passed by input validation from rendered page source. |
 | templates | [signup.html](https://github.com/angela64711/third-milestone-project/blob/main/templates/account/signup.html) | https://validator.w3.org/nu/?doc=https://superangela-2348acaf62bb.herokuapp.com/accounts/signup/&out=html | ![screenshot](documentation/validation/html-templates-signup.png) | Passed by URI validation. |
 
+**HTML Validation Notes**
+
+During HTML validation, a local browser/security extension injected an additional fontawsome script into the page source, which caused validation issues unrelated to the project code. To ensure the submitted code was validated accurately, the injected script was removed from the copied validation input and replaced with the original project script tag before re-running validation. The corrected validation then passed successfully.
+
+
 
 ### CSS
 
@@ -54,6 +59,26 @@ I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com
 | movies | [test_views.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/test_views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/test_views.py) | ![screenshot](documentation/validation/py-movies-test_views.png) | Pass - long test client calls reformatted |
 | movies | [urls.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/urls.py) | ![screenshot](documentation/validation/py-movies-urls.png) | Pass |
 | movies | [views.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/views.py) | ![screenshot](documentation/validation/py-movies-views.png) | Pass - long messages and conditions reformatted |
+
+
+## Responsiveness
+
+
+I've tested my deployed project to check for responsiveness issues.
+
+| Page | Mobile | Tablet | Desktop | Notes |
+| --- | --- | --- | --- | --- |
+| Home | ![screenshot](documentation/responsiveness/mobile-home.png) | ![screenshot](documentation/responsiveness/tablet-home.png) | ![screenshot](documentation/responsiveness/desktop-home.png) | Works as expected |
+| Browse Movies | ![screenshot](documentation/responsiveness/mobile-browse.png) | ![screenshot](documentation/responsiveness/tablet-browse.png) | ![screenshot](documentation/responsiveness/desktop-browse.png) | Works as expected |
+| Movie Detail | ![screenshot](documentation/responsiveness/mobile-detail.png) | ![screenshot](documentation/responsiveness/tablet-detail.png) | ![screenshot](documentation/responsiveness/desktop-detail.png) | Works as expected |
+| Submit Movie | ![screenshot](documentation/responsiveness/mobile-submit.png) | ![screenshot](documentation/responsiveness/tablet-submit.png) | ![screenshot](documentation/responsiveness/desktop-submit.png) | Works as expected |
+| Edit Movie | ![screenshot](documentation/responsiveness/mobile-edit-movie.png) | ![screenshot](documentation/responsiveness/tablet-edit-movie.png) | ![screenshot](documentation/responsiveness/desktop-edit-movie.png) | Works as expected |
+| My Activity | ![screenshot](documentation/responsiveness/mobile-my-activity.png) | ![screenshot](documentation/responsiveness/tablet-my-activity.png) | ![screenshot](documentation/responsiveness/desktop-my-activity.png) | Works as expected |
+| Edit Review | ![screenshot](documentation/responsiveness/mobile-edit-review.png) | ![screenshot](documentation/responsiveness/tablet-edit-review.png) | ![screenshot](documentation/responsiveness/desktop-edit-review.png) | Works as expected |
+| Login | ![screenshot](documentation/responsiveness/mobile-login.png) | ![screenshot](documentation/responsiveness/tablet-login.png) | ![screenshot](documentation/responsiveness/desktop-login.png) | Works as expected |
+| Logout | ![screenshot](documentation/responsiveness/mobile-logout.png) | ![screenshot](documentation/responsiveness/tablet-logout.png) | ![screenshot](documentation/responsiveness/desktop-logout.png) | Works as expected |
+| Register | ![screenshot](documentation/responsiveness/mobile-register.png) | ![screenshot](documentation/responsiveness/tablet-register.png) | ![screenshot](documentation/responsiveness/desktop-register.png) | Works as expected |
+| 404 | ![screenshot](documentation/responsiveness/mobile-404.png) | ![screenshot](documentation/responsiveness/tablet-404.png) | ![screenshot](documentation/responsiveness/desktop-404.png) | Works as expected |
 
 
 
