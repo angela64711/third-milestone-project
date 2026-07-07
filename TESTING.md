@@ -128,3 +128,41 @@ I've tested my deployed project using the Lighthouse Audit tool to check for any
 Mobile performance scores were generally lower than desktop scores due to render-blocking resources, image delivery recommendations, cache lifetime warnings, and font loading considerations identified by Lighthouse. Some of these recommendations relate to third-party resources, including externally hosted movie poster images retrieved through the TMDB API, and therefore fall outside the direct scope of project optimisation.
 
 Accessibility, SEO, and Best Practices scores remained consistently high across the audited pages, indicating that the application provides a good overall user experience despite minor performance recommendations.
+
+
+## Defensive Programming
+
+
+Defensive programming was manually tested with the below user acceptance testing:
+
+
+## Defensive Programming                                                        
+
+| Page | Expectation | Test Performed | Result | Screenshot |
+|-------|-------------|----------------|--------|------------|
+| Navigation | Guest users should only see public navigation links. | Visited the site while logged out. | Submit Movie, My Activity and Logout were hidden. Login and Register links were displayed. | ![screenshot](documentation/defensive/guest-navbar.png) |
+| Movie Detail | Guests should not be able to access movie details and reviews. | Selected **View Details** from a movie card while logged out. | User was redirected to the registration page. | ![screenshot](documentation/defensive/movie-detail-redirect.png) |
+| My Activity | Users should only be able to manage their own content. | Logged in as User A and viewed the My Activity page. | Only movies and reviews submitted by User A were displayed. Content belonging to other users was not visible. | ![screenshot](documentation/defensive/my-reviews.png) |
+| My Activity | Users should not be able to edit movies submitted by other users. | Logged in as User A and attempted to locate edit controls for a movie submitted by User B. | The movie was not displayed in My Activity and no edit controls were available. | ![screenshot](documentation/defensive/my-movies.png) |
+| My Activity | Users should not be able to modify reviews created by other users. | Logged in as User A and viewed reviews written by User B. | No Edit or Delete options were displayed. | ![screenshot](documentation/defensive/user-b-review.png) |
+| My Activity | Edit and Delete actions should only be available within My Activity. | Reviewed available actions on public pages and My Activity. | Edit and Delete buttons were only available for the user's own content within My Activity. | ![screenshot](documentation/defensive/my-activity.png) |
+| Browse Movies / Home | Public pages should not expose content management actions. | Viewed public pages while logged in and logged out. | No Edit or Delete controls were displayed. | ![screenshot](documentation/defensive/public-movies.png) |
+| Movie Detail | Users should only be able to submit one review per movie. | Submitted a review and revisited the movie detail page. | The review form was hidden and the user's existing review appeared first as **Your Review**. | ![screenshot](documentation/defensive/your-review.png) |
+| Movie Submission | Duplicate movie titles should not be accepted. | Attempted to submit a movie already present in the database. | Submission was prevented and an appropriate validation message was displayed. | ![screenshot](documentation/defensive/duplicate-movie.png) |
+| Movie Submission | Required fields should prevent incomplete submissions. | Attempted to submit a movie with missing required information. | Validation errors were displayed and submission was prevented. | ![screenshot](documentation/defensive/missing-fields.png) |
+| Review Submission | Required fields should prevent incomplete reviews. | Attempted to submit a review with missing required information. | Validation errors were displayed and submission was prevented. | ![screenshot](documentation/defensive/missing-review-fields.png) |
+| Moderation | Newly submitted movies should require administrator approval. | Submitted a movie recommendation. | The movie was stored as pending approval and remained hidden from public pages. | ![screenshot](documentation/defensive/movie-approval.png) |
+| Moderation | Newly submitted reviews should require administrator approval. | Submitted a review. | The review remained remained hidden until approved by an administrator. | ![screenshot](documentation/defensive/no-reviews.png) |
+| Moderation | Unapproved movies should not be publicly accessible. | Submitted a movie and verified public pages before approval. | The movie was inaccessible to other users and could not receive reviews until approved. | Manual test |
+| Moderation | Users should be able to edit their own pending submissions. | Submitted content awaiting approval and attempted to edit it. | Content remained editable by its owner while pending approval. | ![screenshot](documentation/defensive/review-approval.png) |
+| Moderation | Edited movies should require approval again. | Edited an approved movie submission. | The movie returned to pending approval status. | ![screenshot](documentation/defensive/movie-pending.png) |
+| Moderation | Edited reviews should require approval again. | Edited an approved review. | The review returned to pending approval status. | ![screenshot](documentation/defensive/review-approval.png) |
+| My Activity | Users should be able to edit movie submissions but not delete them. | Reviewed available actions for submitted movies. | Edit controls were available, while no Delete option was provided. | ![screenshot](documentation/defensive/no-delete-movie.png) |
+| My Activity | Users should be able to edit and delete their own reviews. | Reviewed available actions for personal reviews. | Edit and Delete controls were available only for the user's own reviews. | ![screenshot](documentation/defensive/review-controls.png)|
+| Movie Detail | Movies should remain visible even when no reviews exist. | Removed all reviews associated with a movie. | The movie remained visible and displayed a **Not reviewed yet** message. | ![screenshot](documentation/defensive/no-reviews.png) |
+| Delete Protection | Users should confirm deletion actions. | Attempted to delete a review. | A confirmation page was displayed before deletion was completed. | ![screenshot](documentation/defensive/delete-protection.png) |
+| User Feedback | Users should receive clear feedback after submitting or editing content. | Submitted and edited movies and reviews. | Success messages confirmed that the action was received and that content was awaiting approval where applicable. Messages remained visible until dismissed by the user. | ![screenshot](documentation/defensive/movie-approval.png) |
+| Administration | Standard users should not have access to administrative functionality. | Attempted to access administrative pages as a regular user. | Access was denied. | ![screenshot](documentation/defensive/access-denied.png) |
+| 404 Page | Invalid URLs should display a custom 404 page. | Navigated to a non-existent URL. | Custom 404 page was displayed successfully. | ![screenshot](documentation/defensive/404.png) |
+
+

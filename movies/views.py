@@ -412,7 +412,6 @@ def delete_review(request, review_id):
         Review,
         id=review_id,
         author=request.user,
-        approved=True,
     )
 
     if request.method == "POST":

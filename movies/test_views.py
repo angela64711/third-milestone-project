@@ -132,7 +132,7 @@ class MyActivityViewTest(TestCase):
             movie=self.movie,
             author=self.user,
             rating=5,
-            review_text="This is a thoughtful and useful movie review.",
+            review_text="This is a thoughtful movie review.",
             approved=True,
         )
 
@@ -214,7 +214,7 @@ class EditReviewViewTest(TestCase):
         self.assertEqual(self.review.rating, 4)
         self.assertEqual(
             self.review.review_text,
-            "This is the updated review text after editing.",
+            "This is the updated review after editing.",
         )
         self.assertFalse(self.review.approved)
 
