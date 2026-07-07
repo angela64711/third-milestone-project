@@ -166,3 +166,33 @@ Defensive programming was manually tested with the below user acceptance testing
 | 404 Page | Invalid URLs should display a custom 404 page. | Navigated to a non-existent URL. | Custom 404 page was displayed successfully. | ![screenshot](documentation/defensive/404.png) |
 
 
+
+## User Story Testing
+
+
+
+| Target | Expectation | Outcome | Screenshot |
+| --- | --- | --- | --- |
+| As a guest user | I would like to browse approved movie recommendations | so that I can discover movies recommended by the community. | ![screenshot](documentation/user-stories/browse.png) |
+| As a guest user | I would like to be able to view the details of a movie | so that I can learn more about it and why it was recommended. | ![screenshot](documentation/user-stories/movie-detail.png) |
+| As a guest user | I would like to filter and sort movie recommendations | so that I can find movies that match my interests more easily. | ![screenshot](documentation/user-stories/filter-sort.png)|
+| As a guest user | I would like to register an account | so that I can contribute movie recommendations and reviews to the community. | ![screenshot](documentation/user-stories/register.png) |
+| As a guest user | I would like to quickly understand the purpose of the website | so that I can decide whether it is relevant to me. | ![screenshot](documentation/user-stories/homepage.png)|
+| As a user | I would like to navigate the website easily | so that I can quickly access the information and features I need. | ![screenshot](documentation/user-stories/navbar.png)|
+| As a registered user | I would like to be able to log in and log out of my account | so that I can securely access member-only features. | ![screenshot](documentation/user-stories/login.png)|
+| As a registered user | I would like to submit a movie recommendation | so that I can share movies I think other community members would enjoy. | ![screenshot](documentation/user-stories/submit.png)|
+| As a registered user | I would like to submit a review for an existing movie | so that I can share my own opinion with the community. | ![screenshot](documentation/user-stories/movie-detail.png)|
+| As a registered user | I would like to edit my own review | so that I can correct or update my opinion after submitting it. | ![screenshot](documentation/user-stories/edit-review.png)|
+| As a registered user | I would like to delete my own review | so that I can remove content that I no longer wish to share. | ![screenshot](documentation/user-stories/delete-review.png)|
+| As a site owner | I would like to approve submitted movie recommendations | so that I can make sure only suitable content is published on the website. | ![screenshot](documentation/user-stories/approve-movies.png) |
+| As a site owner | I would like to approve submitted reviews | so that I can ensure that only appropriate user reviews are visible to the community. | ![screenshot](documentation/user-stories/approve-reviews.png)|
+| As a site owner | I would like to manage movie records | so that the movie database remains accurate, relevant, and free of inappropriate content. | ![screenshot](documentation/user-stories/manage-movies.png) |
+| As a site owner | I would like to manage the list of movie genres | so that movies can be categorised consistently across the website. | ![screenshot](documentation/user-stories/genres.png) |
+| As a site owner | I would like an engaging homepage that clearly introduces the movie community | so that visitors better understand the community and are encouraged to participate. | ![screenshot](documentation/user-stories/homepage.png) |
+| As a user | I would like to see a helpful custom 404 error page when I visit a broken link | so that I can easily return to the website instead of feeling stuck. | ![screenshot](documentation/user-stories/404.png) |
+| As a user | I would like to see the average rating of a movie | so that I can quickly understand the community's opinion before reading reviews. | ![screenshot](documentation/user-stories/movie-detail.png) |
+| As a user | I would like forms and review sections to be easy to read and interact with | so that submitting and managing reviews feels intuitive and pleasant. | ![screenshot](documentation/user-stories/review-controls.png) |
+| As a user | I would like to see movie posters of the suggested films | so that browsing the website feels more engaging and visual. | ![screenshot](documentation/user-stories/poster.png)|
+
+
+
