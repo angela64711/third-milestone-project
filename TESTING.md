@@ -195,4 +195,121 @@ Defensive programming was manually tested with the below user acceptance testing
 | As a user | I would like to see movie posters of the suggested films | so that browsing the website feels more engaging and visual. | ![screenshot](documentation/user-stories/poster.png)|
 
 
+## Automated Testing
+
+I have conducted a series of automated tests on my application.
+
+> [!NOTE]  
+> I fully acknowledge and understand that, in a real-world scenario, an extensive set of additional tests would be more comprehensive.
+
+### Python (Unit Testing)
+
+I used Django's built-in unit testing framework to verify the functionality of the application.
+
+Tests were written for models, forms and views to ensure that core functionality behaved as expected.
+
+The following command was used to run the full test suite:
+
+```bash
+python manage.py test movies
+```
+
+Individual test files were also executed during development:
+
+```bash
+python manage.py test movies.test_models
+python manage.py test movies.test_forms
+python manage.py test movies.test_views
+```
+
+### Test Coverage
+
+Automated tests were written for:
+
+- Model behaviour and constraints
+- Form validation
+- Authentication requirements
+- Page rendering
+- CRUD functionality
+- Ownership permissions
+- Approval workflows
+- Review submission and moderation logic
+
+### Coverage Report
+
+Coverage was generated using the following commands:
+
+```bash
+pip install coverage
+
+coverage run --omit="*/site-packages/*,*/migrations/*,*/__init__.py,env.py,.env" manage.py test movies
+
+coverage report
+
+coverage html
+```
+
+The HTML report was generated inside the `htmlcov` directory and was viewed directly by opening:
+
+
+```text
+htmlcov/index.html
+```
+in the browser.
+
+The final coverage report showed 97% total test coverage.
+
+Most core application files reached full coverage, including `forms.py`, `models.py`, `movies/urls.py`, and all test files. The main uncovered lines were in `views.py`, which reached 93% coverage, and `admin.py`, which reached 88% coverage.
+
+The uncovered lines were reviewed in the HTML coverage report. They did not indicate broken functionality, but highlighted small areas that were not directly reached by the automated tests.
+
+![Coverage Report](documentation/testing/coverage-report.png)
+
+
+
+### Unit Test Issues
+
+During testing, a small number of issues were identified and corrected.
+
+| Issue | Resolution |
+|-------|------------|
+| Users could only delete approved reviews | The delete review view was updated so users can delete their own reviews regardless of approval status while ownership protection remains enforced. |
+| Some view tests failed after shortening test strings for PEP8 compliance | Test assertions were updated so expected values matched the modified fixture data. |
+
+
+
+## Bugs
+
+
+### Fixed Bugs
+
+[![GitHub issue custom search](https://img.shields.io/github/issues-search/angela64711/third-milestone-project?query=is%3Aissue%20is%3Aclosed%20label%3Abug&label=Fixed%20Bugs&color=green)](https://www.github.com/angela64711/third-milestone-project/issues?q=is%3Aissue+is%3Aclosed+label%3Abug)
+
+I've used [GitHub Issues](https://www.github.com/angela64711/third-milestone-project/issues) to track and manage bugs and issues during the development stages of my project.
+
+All previously closed/fixed bugs can be tracked [here](https://www.github.com/angela64711/third-milestone-project/issues?q=is%3Aissue+is%3Aclosed+label%3Abug).
+
+![screenshot](documentation/bugs/gh-issues-closed.png)
+
+
+### Unfixed Bugs
+
+
+[![GitHub issue custom search](https://img.shields.io/github/issues-search/angela64711/third-milestone-project?query=is%3Aissue%2Bis%3Aopen%2Blabel%3Abug&label=Unfixed%20Bugs&color=red)](https://www.github.com/angela64711/third-milestone-project/issues?q=is%3Aissue+is%3Aopen+label%3Abug)
+
+Any remaining open issues can be tracked [here](https://www.github.com/angela64711/third-milestone-project/issues?q=is%3Aissue+is%3Aopen+label%3Abug).
+
+![screenshot](documentation/bugs/gh-issues-open.png)
+
+
+
+### Known Issues
+
+
+No known issues remain at the time of submission.
+
+Extensive manual testing, automated testing, validation, and responsiveness checks were completed throughout development. While no further issues were identified, it is impossible to guarantee that undiscovered edge cases do not exist.
+
+> [!IMPORTANT]  
+> There are no remaining bugs that I am aware of. However, as with any application, undetected issues may still exist.
 
