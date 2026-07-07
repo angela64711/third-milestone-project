@@ -29,7 +29,7 @@ I have used the recommended [HTML W3C Validator](https://validator.w3.org) to va
 
 **HTML Validation Notes**
 
-During HTML validation, a local browser/security extension injected an additional fontawsome script into the page source, which caused validation issues unrelated to the project code. To ensure the submitted code was validated accurately, the injected script was removed from the copied validation input and replaced with the original project script tag before re-running validation. The corrected validation then passed successfully.
+During HTML validation, a local browser/security extension injected an additional Font Awesome script into the page source, which caused validation issues unrelated to the project code. To ensure the submitted code was validated accurately, the injected script was removed from the copied validation input and replaced with the original project script tag before validation was re-run. The corrected validation then passed successfully.
 
 
 
@@ -40,7 +40,7 @@ I have used the recommended [CSS Jigsaw Validator](https://jigsaw.w3.org/css-val
 
 | Directory | File | URL | Screenshot | Notes |
 | --- | --- | --- | --- | --- |
-| static | [style.css](https://github.com/angela64711/third-milestone-project/blob/main/static/css/style.css) | (https://jigsaw.w3.org/css-validator/validator?uri=https://superangela-2348acaf62bb.herokuapp.com/static/css/style.css&output=html#warnings) | ![screenshot](documentation/validation/css-static-style.png) | No CSS errors found. Validator warnings relate to CSS variables used for Google Font declarations and do not affect functionality. |
+| static | [style.css](https://github.com/angela64711/third-milestone-project/blob/main/static/css/style.css) | (https://jigsaw.w3.org/css-validator/validator?uri=https://superangela-2348acaf62bb.herokuapp.com/static/css/style.css&output=html#warnings) | ![screenshot](documentation/validation/css-static-style.png) | No CSS errors found. Validator warnings relate to CSS variables used in Google Font declarations and do not affect functionality. |
 
 ### Python
 
@@ -48,23 +48,23 @@ I have used the recommended [PEP8 CI Python Linter](https://pep8ci.herokuapp.com
 
 | Directory | File | URL | Screenshot | Notes |
 | --- | --- | --- | --- | --- |
-|  | [manage.py](https://github.com/angela64711/third-milestone-project/blob/main/manage.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/manage.py) | ![screenshot](documentation/validation/py--manage.png) | Pass |
-| movie_project | [settings.py](https://github.com/angela64711/third-milestone-project/blob/main/movie_project/settings.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movie_project/settings.py) | ![screenshot](documentation/validation/py-movie_project-settings.png) | Pass - Django default long lines handled with # noqa |
-| movie_project | [urls.py](https://github.com/angela64711/third-milestone-project/blob/main/movie_project/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movie_project/urls.py) | ![screenshot](documentation/validation/py-movie_project-urls.png) | Pass |
-| movies | [admin.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/admin.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/admin.py) | ![screenshot](documentation/validation/py-movies-admin.png) | Pass |
-| movies | [forms.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/forms.py) | ![screenshot](documentation/validation/py-movies-forms.png) | Pass - long validation messages and placeholders reformatted |
-| movies | [models.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/models.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/models.py) | ![screenshot](documentation/validation/py-movies-models.png) | Pass - limited # noqa used for long Django model fields |
-| movies | [test_forms.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/test_forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/test_forms.py) | ![screenshot](documentation/validation/py-movies-test_forms.png) | Pass - long test strings reformatted |
-| movies | [test_models.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/test_models.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/test_models.py) | ![screenshot](documentation/validation/py-movies-test_models.png) | Pass |
-| movies | [test_views.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/test_views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/test_views.py) | ![screenshot](documentation/validation/py-movies-test_views.png) | Pass - long test client calls reformatted |
-| movies | [urls.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/urls.py) | ![screenshot](documentation/validation/py-movies-urls.png) | Pass |
-| movies | [views.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/views.py) | ![screenshot](documentation/validation/py-movies-views.png) | Pass - long messages and conditions reformatted |
+|  | [manage.py](https://github.com/angela64711/third-milestone-project/blob/main/manage.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/manage.py) | ![screenshot](documentation/validation/py--manage.png) | Passed |
+| movie_project | [settings.py](https://github.com/angela64711/third-milestone-project/blob/main/movie_project/settings.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movie_project/settings.py) | ![screenshot](documentation/validation/py-movie_project-settings.png) | Passed - Django default long lines handled with # noqa |
+| movie_project | [urls.py](https://github.com/angela64711/third-milestone-project/blob/main/movie_project/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movie_project/urls.py) | ![screenshot](documentation/validation/py-movie_project-urls.png) | Passed |
+| movies | [admin.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/admin.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/admin.py) | ![screenshot](documentation/validation/py-movies-admin.png) | Passed |
+| movies | [forms.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/forms.py) | ![screenshot](documentation/validation/py-movies-forms.png) | Passed - long validation messages and placeholders reformatted |
+| movies | [models.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/models.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/models.py) | ![screenshot](documentation/validation/py-movies-models.png) | Passed - limited # noqa used for long Django model fields |
+| movies | [test_forms.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/test_forms.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/test_forms.py) | ![screenshot](documentation/validation/py-movies-test_forms.png) | Passed - long test strings reformatted |
+| movies | [test_models.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/test_models.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/test_models.py) | ![screenshot](documentation/validation/py-movies-test_models.png) | Passed |
+| movies | [test_views.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/test_views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/test_views.py) | ![screenshot](documentation/validation/py-movies-test_views.png) | Passed - long test client calls reformatted |
+| movies | [urls.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/urls.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/urls.py) | ![screenshot](documentation/validation/py-movies-urls.png) | Passed |
+| movies | [views.py](https://github.com/angela64711/third-milestone-project/blob/main/movies/views.py) | [PEP8 CI Link](https://pep8ci.herokuapp.com/https://raw.githubusercontent.com/angela64711/third-milestone-project/main/movies/views.py) | ![screenshot](documentation/validation/py-movies-views.png) | Passed - long messages and conditions reformatted |
 
 
 ## Responsiveness
 
 
-I've tested my deployed project to check for responsiveness issues.
+I tested my deployed project to check for responsiveness issues.
 
 | Page | Mobile | Tablet | Desktop | Notes |
 | --- | --- | --- | --- | --- |
@@ -84,7 +84,7 @@ I've tested my deployed project to check for responsiveness issues.
 
 ## Browser Compatibility
 
-I've tested my deployed project on multiple browsers to check for compatibility issues.
+I tested my deployed project on multiple browsers to check for compatibility issues.
 
 | Page | Chrome | Firefox | Edge | Notes |
 | --- | --- | --- | --- | --- |
@@ -103,10 +103,9 @@ I've tested my deployed project on multiple browsers to check for compatibility 
 
 
 
-
 ## Lighthouse Audit
 
-I've tested my deployed project using the Lighthouse Audit tool to check for any major issues. Some warnings are outside of my control, and mobile results tend to be lower than desktop.
+I tested my deployed project using the Lighthouse Audit tool to check for any major issues. Some warnings are outside of my control, and mobile results tend to be lower than desktop.
 
 | Page | Mobile | Desktop |
 | --- | --- | --- |
@@ -152,7 +151,7 @@ Defensive programming was manually tested with the below user acceptance testing
 | Movie Submission | Required fields should prevent incomplete submissions. | Attempted to submit a movie with missing required information. | Validation errors were displayed and submission was prevented. | ![screenshot](documentation/defensive/missing-fields.png) |
 | Review Submission | Required fields should prevent incomplete reviews. | Attempted to submit a review with missing required information. | Validation errors were displayed and submission was prevented. | ![screenshot](documentation/defensive/missing-review-fields.png) |
 | Moderation | Newly submitted movies should require administrator approval. | Submitted a movie recommendation. | The movie was stored as pending approval and remained hidden from public pages. | ![screenshot](documentation/defensive/movie-approval.png) |
-| Moderation | Newly submitted reviews should require administrator approval. | Submitted a review. | The review remained remained hidden until approved by an administrator. | ![screenshot](documentation/defensive/no-reviews.png) |
+| Moderation | Newly submitted reviews should require administrator approval. | Submitted a review. | The review remained hidden until approved by an administrator. | ![screenshot](documentation/defensive/no-reviews.png) |
 | Moderation | Unapproved movies should not be publicly accessible. | Submitted a movie and verified public pages before approval. | The movie was inaccessible to other users and could not receive reviews until approved. | Manual test |
 | Moderation | Users should be able to edit their own pending submissions. | Submitted content awaiting approval and attempted to edit it. | Content remained editable by its owner while pending approval. | ![screenshot](documentation/defensive/review-approval.png) |
 | Moderation | Edited movies should require approval again. | Edited an approved movie submission. | The movie returned to pending approval status. | ![screenshot](documentation/defensive/movie-pending.png) |
@@ -193,6 +192,7 @@ Defensive programming was manually tested with the below user acceptance testing
 | As a user | I would like to see the average rating of a movie | so that I can quickly understand the community's opinion before reading reviews. | ![screenshot](documentation/user-stories/movie-detail.png) |
 | As a user | I would like forms and review sections to be easy to read and interact with | so that submitting and managing reviews feels intuitive and pleasant. | ![screenshot](documentation/user-stories/review-controls.png) |
 | As a user | I would like to see movie posters of the suggested films | so that browsing the website feels more engaging and visual. | ![screenshot](documentation/user-stories/poster.png)|
+
 
 
 ## Automated Testing
