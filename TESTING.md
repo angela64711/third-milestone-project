@@ -14,18 +14,18 @@ I have used the recommended [HTML W3C Validator](https://validator.w3.org) to va
 
 | Directory | File | URL | Screenshot | Notes |
 | --- | --- | --- | --- | --- |
-| movies | [browse.html](https://github.com/angela64711/third-milestone-project/blob/main/movies/templates/movies/browse.html) | (https://validator.w3.org/nu/?doc=https://superangela-2348acaf62bb.herokuapp.com/movies/&out=html) | ![screenshot](documentation/validation/html-movies-browse.png) | Passed by URI validation. |
+| movies | [browse.html](https://github.com/angela64711/third-milestone-project/blob/main/movies/templates/movies/browse.html) | [W3 Validator](https://validator.w3.org/nu/?doc=https://superangela-2348acaf62bb.herokuapp.com/movies/&out=html) | ![screenshot](documentation/validation/html-movies-browse.png) | Passed by URI validation. |
 | movies | [delete_review.html](https://github.com/angela64711/third-milestone-project/blob/main/movies/templates/movies/delete_review.html) | N/A - validated by input from rendered source. | ![screenshot](documentation/validation/html-movies-delete_review.png) | Passed by input validation from rendered page source. |
 | movies | [edit_movie.html](https://github.com/angela64711/third-milestone-project/blob/main/movies/templates/movies/edit_movie.html) | N/A - validated by input from rendered source. | ![screenshot](documentation/validation/html-movies-edit_movie.png) | Passed by input validation from rendered page source. |
 | movies | [edit_review.html](https://github.com/angela64711/third-milestone-project/blob/main/movies/templates/movies/edit_review.html) | N/A - validated by input from rendered source. | ![screenshot](documentation/validation/html-movies-edit_review.png) | Passed by input validation from rendered page source. |
-| movies | [index.html](https://github.com/angela64711/third-milestone-project/blob/main/movies/templates/movies/index.html) | (https://validator.w3.org/nu/?doc=https://superangela-2348acaf62bb.herokuapp.com/accounts/login/&out=html) | ![screenshot](documentation/validation/html-movies-index.png) | Passed by URI validation. |
+| movies | [index.html](https://github.com/angela64711/third-milestone-project/blob/main/movies/templates/movies/index.html) | [W3 Validator](https://validator.w3.org/nu/?doc=https://superangela-2348acaf62bb.herokuapp.com/accounts/login/&out=html) | ![screenshot](documentation/validation/html-movies-index.png) | Passed by URI validation. |
 | movies | [movie_detail.html](https://github.com/angela64711/third-milestone-project/blob/main/movies/templates/movies/movie_detail.html) | N/A - validated by input from rendered source. | ![screenshot](documentation/validation/html-movies-movie_detail.png) | Passed by input validation from rendered page source. |
 | movies | [my_reviews.html](https://github.com/angela64711/third-milestone-project/blob/main/movies/templates/movies/my_reviews.html) | N/A - validated by input from rendered source. | ![screenshot](documentation/validation/html-movies-my_reviews.png) | Passed by input validation from rendered page source. |
 | movies | [submit_movie.html](https://github.com/angela64711/third-milestone-project/blob/main/movies/templates/movies/submit_movie.html) | N/A - validated by input from rendered source. | ![screenshot](documentation/validation/html-movies-submit_movie.png) | Passed by input validation from rendered page source. |
 | templates | [404.html](https://github.com/angela64711/third-milestone-project/blob/main/templates/404.html) | N/A - validated by input from rendered source. | ![screenshot](documentation/validation/html-templates-404.png) | Passed by input validation from rendered page source. |
-| templates | [login.html](https://github.com/angela64711/third-milestone-project/blob/main/templates/account/login.html) | https://validator.w3.org/nu/?doc=https://superangela-2348acaf62bb.herokuapp.com/accounts/login/&out=html | ![screenshot](documentation/validation/html-templates-login.png) | Passed by URI validation. |
+| templates | [login.html](https://github.com/angela64711/third-milestone-project/blob/main/templates/account/login.html) |[W3 Validator](https://validator.w3.org/nu/?doc=https://superangela-2348acaf62bb.herokuapp.com/accounts/login/&out=html) | ![screenshot](documentation/validation/html-templates-login.png) | Passed by URI validation. |
 | templates | [logout.html](https://github.com/angela64711/third-milestone-project/blob/main/templates/account/logout.html) | N/A - validated by input from rendered source. | ![screenshot](documentation/validation/html-templates-logout.png) | Passed by input validation from rendered page source. |
-| templates | [signup.html](https://github.com/angela64711/third-milestone-project/blob/main/templates/account/signup.html) | https://validator.w3.org/nu/?doc=https://superangela-2348acaf62bb.herokuapp.com/accounts/signup/&out=html | ![screenshot](documentation/validation/html-templates-signup.png) | Passed by URI validation. |
+| templates | [signup.html](https://github.com/angela64711/third-milestone-project/blob/main/templates/account/signup.html) | [W3 Validator](https://validator.w3.org/nu/?doc=https://superangela-2348acaf62bb.herokuapp.com/accounts/signup/&out=html) | ![screenshot](documentation/validation/html-templates-signup.png) | Passed by URI validation. |
 
 **HTML Validation Notes**
 
@@ -40,7 +40,7 @@ I have used the recommended [CSS Jigsaw Validator](https://jigsaw.w3.org/css-val
 
 | Directory | File | URL | Screenshot | Notes |
 | --- | --- | --- | --- | --- |
-| static | [style.css](https://github.com/angela64711/third-milestone-project/blob/main/static/css/style.css) | (https://jigsaw.w3.org/css-validator/validator?uri=https://superangela-2348acaf62bb.herokuapp.com/static/css/style.css&output=html#warnings) | ![screenshot](documentation/validation/css-static-style.png) | No CSS errors found. Validator warnings relate to CSS variables used in Google Font declarations and do not affect functionality. |
+| static | [style.css](https://github.com/angela64711/third-milestone-project/blob/main/static/css/style.css) | [CSS Jigsaw Validator](https://jigsaw.w3.org/css-validator/validator?uri=https://superangela-2348acaf62bb.herokuapp.com/static/css/style.css&output=html#warnings) | ![screenshot](documentation/validation/css-static-style.png) | No CSS errors found. Validator warnings relate to CSS variables used in Google Font declarations and do not affect functionality. |
 
 ### Python
 
@@ -263,7 +263,7 @@ Most core application files reached full coverage, including `forms.py`, `models
 
 The uncovered lines were reviewed in the HTML coverage report. They did not indicate broken functionality, but highlighted small areas that were not directly reached by the automated tests.
 
-![Coverage Report](documentation/testing/coverage-report.png)
+![Coverage Report](documentation/automation/coverage-report.png)
 
 
 
@@ -274,7 +274,7 @@ During testing, a small number of issues were identified and corrected.
 | Issue | Resolution |
 |-------|------------|
 | Users could only delete approved reviews | The delete review view was updated so users can delete their own reviews regardless of approval status while ownership protection remains enforced. |
-| Some view tests failed after shortening test strings for PEP8 compliance | Test assertions were updated so expected values matched the modified fixture data. |
+| Some view test assertions required updating after shortening test strings for PEP8 compliance | Test assertions were updated so expected values matched the modified fixture data. |
 
 
 
